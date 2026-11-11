@@ -1,0 +1,21 @@
+# Unused source/reference image folders — not needed for the live site
+Рефы/
+Шеркала/
+Бозжыра/
+Долина шаров/
+Тузбаир/
+
+# Source / design files (not part of the published site)
+/*.cdr
+/*.docx
+/*.svg
+
+# Stray unused images at root (real assets live in BG/, 2 block/, Galery/)
+/*.png
+/*.jpg
+/*.jpeg
+/*.webp
+
+# Tooling / local
+.claude/
+*.ps1
