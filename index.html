@@ -1152,12 +1152,13 @@
       .route-img-area,
       .route-img-area img { height: auto; }
 
-      /* Vertical dotted journey path connecting the stacked rows */
+      /* Zig-zag dotted journey path connecting the stacked rows.
+         SVG is child 1 of .routes-track, so route rows are children 2–5:
+         even (routes 1 & 3) → connector on the LEFT,
+         odd  (route 2)      → connector on the RIGHT. */
       .route-row:not(:last-child)::after {
         content: '';
         position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
         bottom: -48px;
         height: 48px;
         border-left: 2px dashed #c8c0b8;
@@ -1166,9 +1167,7 @@
       .route-row:not(:last-child)::before {
         content: '';
         position: absolute;
-        left: 50%;
         bottom: -31px;
-        transform: translateX(-50%);
         width: 14px;
         height: 14px;
         border-radius: 50%;
@@ -1176,6 +1175,12 @@
         box-shadow: 0 0 0 5px rgba(192,90,62,.16);
         z-index: 2;
       }
+      /* Routes 1 & 3 → connector on the LEFT */
+      .routes-track > .route-row:nth-child(even):not(:last-child)::after  { left: 24px; }
+      .routes-track > .route-row:nth-child(even):not(:last-child)::before { left: 17px; }
+      /* Route 2 → connector on the RIGHT */
+      .routes-track > .route-row:nth-child(odd):not(:last-child)::after  { right: 24px; }
+      .routes-track > .route-row:nth-child(odd):not(:last-child)::before { right: 17px; }
     }
 
     /* ============================================================
