@@ -1175,8 +1175,10 @@
 
       .container { padding: 0 20px; }
 
+      #stats { padding: 0 0 56px; }
       .stats-inner { flex-wrap: wrap; }
-      .stat-item { flex: 1 1 48%; border-bottom: 1px solid rgba(255,255,255,.08); }
+      .stat-item { flex: 1 1 48%; padding: 26px 20px; border-bottom: 1px solid rgba(255,255,255,.08); }
+      .stat-num { font-size: 40px; }
 
       #routes { padding: 80px 0 70px; }
       .routes-head { margin-bottom: 50px; }
@@ -1189,7 +1191,13 @@
       }
       .route-img-area,
       .route-img-area img { height: auto; }
-      .route-text { padding: 20px 0 0; }
+      .route-row .route-text,
+      .route-row:nth-child(odd) .route-text {
+        padding: 18px 0 0;
+        align-items: center;
+        text-align: center;
+      }
+      .route-row-meta { align-items: center; }
 
       #why { padding: 72px 0; }
       .why-head { margin-bottom: 40px; }
@@ -1209,8 +1217,24 @@
 
       #gallery { padding: 80px 0; }
       .gallery-head { flex-direction: column; align-items: flex-start; }
-      .gallery-grid { columns: 2; column-gap: 10px; }
-      .gallery-cell { margin-bottom: 10px; }
+      /* Horizontal finger-swipe carousel on mobile */
+      .gallery-grid {
+        columns: auto;
+        display: flex;
+        gap: 12px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 14px;
+        scrollbar-width: none;
+      }
+      .gallery-grid::-webkit-scrollbar { display: none; }
+      .gallery-cell {
+        flex: 0 0 80%;
+        margin-bottom: 0;
+        scroll-snap-align: center;
+      }
+      .gallery-cell img { height: 300px; }
 
       footer { padding: 60px 0 28px; }
       .footer-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
@@ -1464,7 +1488,7 @@
   <video class="hero-video" id="heroVidA" autoplay muted loop playsinline preload="auto" aria-hidden="true">
     <source src="NEW%20HERO.mp4" type="video/mp4">
   </video>
-  <video class="hero-video" id="heroVidB" muted playsinline preload="auto" aria-hidden="true">
+  <video class="hero-video" id="heroVidB" muted playsinline preload="none" aria-hidden="true">
     <source src="NEW%20HERO.mp4" type="video/mp4">
   </video>
   <div class="hero-overlay" aria-hidden="true"></div>
@@ -1652,7 +1676,7 @@
               <strong>Расстояние</strong>220 км от Актау
             </div>
             <div class="route-row-meta-item">
-              <strong>Тип маршрута</strong>Пеший + джиппинг
+              <strong>Тип маршрута</strong>Джиппинг 4×4
             </div>
             <div class="route-row-meta-item">
               <strong>Продолжительность</strong>1–2 дня
@@ -2053,6 +2077,8 @@
     }
     function begin() {
       const p = vA.play(); if (p && p.catch) p.catch(() => {});
+      /* Defer the 2nd video so it doesn't compete with the first load */
+      setTimeout(() => { try { vB.load(); } catch (e) {} }, 3000);
       requestAnimationFrame(tick);
     }
     if (vA.readyState >= 2) begin();
