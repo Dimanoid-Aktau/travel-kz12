@@ -297,7 +297,7 @@
       z-index: 0;
       pointer-events: none;
       opacity: 0;
-      transition: opacity 1.3s ease-in-out;
+      transition: opacity 1s ease-in-out;
     }
     /* Layer A visible by default (fallback if JS is off) */
     #heroVidA { opacity: 1; }
@@ -1961,7 +1961,7 @@
     const vB = document.getElementById('heroVidB');
     if (!vA || !vB) return;
     vA.loop = false; vB.loop = false;      // JS handles looping via crossfade
-    const LEAD = 1.3;                      // seconds before the end to begin the fade
+    const LEAD = 1.0;                      // seconds before the end to begin the fade
     let active = vA, next = vB, armed = true;
     vA.style.opacity = '1';
     vB.style.opacity = '0';
