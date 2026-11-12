@@ -564,7 +564,7 @@
     .why-card {
       flex: 1;
       min-width: 0;
-      padding: 76px 24px 32px 24px;
+      padding: 36px 24px 32px;
       border-radius: 20px;
       background: rgba(255,255,255,0.14);
       backdrop-filter: blur(18px);
@@ -574,8 +574,7 @@
         0 8px 32px rgba(0,0,0,.12),
         inset 0 1px 0 rgba(255,255,255,.22);
       transition: transform .3s ease, box-shadow .3s ease;
-      position: relative;
-      text-align: left;
+      text-align: center;
     }
     .why-card:hover {
       transform: translateY(-6px);
@@ -583,21 +582,16 @@
         0 20px 48px rgba(0,0,0,.18),
         inset 0 1px 0 rgba(255,255,255,.30);
     }
-    .why-num {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: #fff;
-      color: var(--terra);
-      font-size: 17px;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 2px 12px rgba(0,0,0,.16);
+    .why-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 20px;
+    }
+    .why-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
     }
     .why-title {
       font-size: 16px;
@@ -1589,31 +1583,31 @@
     <div class="why-grid">
 
       <div class="why-card reveal">
-        <div class="why-num">1</div>
+        <div class="why-icon"><img src="why-icon-1.svg" alt="Опытные гиды"></div>
         <h3 class="why-title">Опытные гиды</h3>
         <p class="why-desc">Местные проводники, знающие каждый камень Мангистау. Ваша безопасность — наш главный приоритет на маршруте.</p>
       </div>
 
       <div class="why-card reveal reveal-delay-1">
-        <div class="why-num">2</div>
+        <div class="why-icon"><img src="why-icon-2.svg" alt="Надёжный транспорт"></div>
         <h3 class="why-title">Надёжный транспорт</h3>
         <p class="why-desc">Подготовленные внедорожники 4×4 для любого бездорожья. Добираемся туда, куда не проедет обычный автомобиль.</p>
       </div>
 
       <div class="why-card reveal reveal-delay-2">
-        <div class="why-num">3</div>
+        <div class="why-icon"><img src="why-icon-3.svg" alt="Комфорт в пустыне"></div>
         <h3 class="why-title">Комфорт в пустыне</h3>
         <p class="why-desc">Качественное снаряжение, домашняя еда и уютные ночлеги под самым звёздным небом в жизни.</p>
       </div>
 
       <div class="why-card reveal">
-        <div class="why-num">4</div>
+        <div class="why-icon"><img src="why-icon-4.svg" alt="Лучшие ракурсы"></div>
         <h3 class="why-title">Лучшие ракурсы</h3>
         <p class="why-desc">Знаем «золотые часы» и точки для идеальных кадров. Вернётесь с фотографиями, от которых перехватывает дыхание.</p>
       </div>
 
       <div class="why-card reveal reveal-delay-1">
-        <div class="why-num">5</div>
+        <div class="why-icon"><img src="why-icon-5.svg" alt="Честные цены"></div>
         <h3 class="why-title">Честные цены</h3>
         <p class="why-desc">Прозрачное ценообразование без скрытых платежей. Вы платите ровно столько, сколько обсудили при бронировании.</p>
       </div>

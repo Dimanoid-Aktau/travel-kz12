@@ -8,8 +8,13 @@
 # Source / design files (not part of the published site)
 /*.cdr
 /*.docx
-# Exclude all root SVGs
+# Exclude all root SVGs except why-us icons
 /*.svg
+!why-icon-1.svg
+!why-icon-2.svg
+!why-icon-3.svg
+!why-icon-4.svg
+!why-icon-5.svg
 
 # Stray unused images at root (real assets live in BG/, 2 block/, Galery/)
 /*.png
