@@ -30,6 +30,7 @@
   <meta name="yandex-verification" content="YANDEX_VERIFICATION_CODE">
 
   <!-- Preload critical images -->
+  <link rel="preload" as="image" href="BG/hero-poster.jpg">
   <link rel="preload" as="image" href="BG/BG%20%D0%B7%D0%B0%D0%B4%D0%BD%D1%8F%D1%8F%20%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D0%B0.png">
   <link rel="preload" as="image" href="BG/MANGISTAU.png">
 
@@ -969,9 +970,11 @@
       border-radius: 10px;
       box-shadow: 0 30px 80px rgba(0,0,0,.6);
       transform: scale(.94);
-      transition: transform .35s cubic-bezier(.22,1,.36,1);
+      transition: transform .35s cubic-bezier(.22,1,.36,1), opacity .28s ease;
     }
     .lightbox.open img { transform: scale(1); }
+    /* Dim fade while swapping to the previous/next photo */
+    .lightbox img.swapping { opacity: 0; transform: scale(.97); }
     .lightbox-close,
     .lightbox-nav {
       position: absolute;
@@ -1536,10 +1539,10 @@
      HERO — PARALLAX
 ============================================================ -->
 <section id="hero" aria-label="Мангистау — дикая красота Казахстана">
-  <video class="hero-video" id="heroVidA" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+  <video class="hero-video" id="heroVidA" autoplay muted loop playsinline preload="auto" poster="BG/hero-poster.jpg" aria-hidden="true">
     <source src="NEW%20HERO.mp4" type="video/mp4">
   </video>
-  <video class="hero-video" id="heroVidB" muted playsinline preload="none" aria-hidden="true">
+  <video class="hero-video" id="heroVidB" muted playsinline preload="none" poster="BG/hero-poster.jpg" aria-hidden="true">
     <source src="NEW%20HERO.mp4" type="video/mp4">
   </video>
   <div class="hero-overlay" aria-hidden="true"></div>
@@ -2376,12 +2379,31 @@
     const lbImg = document.getElementById('lbImg');
     const imgs  = [...document.querySelectorAll('.gallery-cell img')];
     let idx = 0;
-    const show = (i) => {
+    // Instant swap — used when first opening the lightbox
+    const setImg = (i) => {
       idx = (i + imgs.length) % imgs.length;
       lbImg.src = imgs[idx].currentSrc || imgs[idx].src;
       lbImg.alt = imgs[idx].alt || '';
     };
-    const open = (i) => { show(i); lb.classList.add('open'); document.body.style.overflow = 'hidden'; };
+    // Dim-fade swap — used when stepping to prev/next
+    const show = (i) => {
+      idx = (i + imgs.length) % imgs.length;
+      const src = imgs[idx].currentSrc || imgs[idx].src;
+      const alt = imgs[idx].alt || '';
+      lbImg.classList.add('swapping');          // fade + dim current photo out
+      const pre = new Image();
+      const swap = () => {
+        lbImg.src = src;
+        lbImg.alt = alt;
+        requestAnimationFrame(() => lbImg.classList.remove('swapping')); // fade new one in
+      };
+      pre.onload = swap;
+      pre.onerror = swap;
+      pre.src = src;
+      // Fallback in case the image is cached and onload is skipped
+      if (pre.complete) swap();
+    };
+    const open = (i) => { setImg(i); lb.classList.add('open'); document.body.style.overflow = 'hidden'; };
     const close = () => { lb.classList.remove('open'); document.body.style.overflow = ''; };
     imgs.forEach((im, i) => im.addEventListener('click', () => open(i)));
     document.getElementById('lbClose').addEventListener('click', close);
