@@ -674,57 +674,60 @@
       text-align: center;
       margin-bottom: 64px;
     }
+    .why-lead {
+      font-size: 23px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 24px;
+      line-height: 1.3;
+    }
+    .why-intro {
+      max-width: 860px;
+      margin: 0 auto 44px;
+      font-size: 17px;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.92);
+    }
     .why-grid {
       display: flex;
       flex-wrap: nowrap;
-      gap: 20px;
       align-items: stretch;
     }
     .why-card {
       flex: 1;
       min-width: 0;
-      padding: 36px 24px 32px;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.14);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border: 1px solid rgba(255,255,255,0.32);
-      box-shadow:
-        0 8px 32px rgba(0,0,0,.12),
-        inset 0 1px 0 rgba(255,255,255,.22);
-      transition: transform .3s ease, box-shadow .3s ease;
+      padding: 8px 32px;
       text-align: center;
+      position: relative;
     }
-    .why-card:hover {
-      transform: translateY(-6px);
-      box-shadow:
-        0 20px 48px rgba(0,0,0,.18),
-        inset 0 1px 0 rgba(255,255,255,.30);
+    /* thin vertical divider between cards */
+    .why-card + .why-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 4px;
+      bottom: 4px;
+      width: 1px;
+      background: rgba(255,255,255,0.28);
     }
-    .why-icon {
-      width: 64px;
-      height: 64px;
-      margin: 0 auto 20px;
-    }
-    .why-icon img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      filter: brightness(0) invert(1);
+    .why-num {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      color: rgba(255,255,255,0.62);
+      margin-bottom: 22px;
     }
     .why-title {
-      font-size: 16px;
+      font-size: 21px;
       font-weight: 800;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
       color: #fff;
-      margin-bottom: 14px;
-      line-height: 1.35;
+      margin-bottom: 16px;
+      line-height: 1.3;
     }
     .why-desc {
-      font-size: 14px;
-      line-height: 1.80;
-      color: rgba(255,255,255,0.88);
+      font-size: 15px;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.86);
     }
 
     /* ============================================================
@@ -1258,15 +1261,18 @@
 
       #why { padding: 72px 0; }
       .why-head { margin-bottom: 40px; }
-      .why-grid { flex-wrap: wrap; gap: 12px; }
+      .why-lead { font-size: 19px; margin-bottom: 18px; }
+      .why-intro { font-size: 14px; line-height: 1.75; margin-bottom: 32px; }
+      .why-grid { flex-wrap: wrap; gap: 28px 12px; }
       .why-card {
         flex: 0 1 calc(50% - 6px);
-        padding: 24px 16px 22px;
-        border-radius: 16px;
+        padding: 4px 10px;
       }
-      .why-icon { width: 46px; height: 46px; margin-bottom: 14px; }
-      .why-title { font-size: 13px; letter-spacing: .8px; margin-bottom: 9px; }
-      .why-desc { font-size: 12px; line-height: 1.6; }
+      /* no vertical dividers in the 2-column mobile layout */
+      .why-card + .why-card::before { display: none; }
+      .why-num { font-size: 13px; letter-spacing: 2px; margin-bottom: 12px; }
+      .why-title { font-size: 15px; margin-bottom: 10px; line-height: 1.3; }
+      .why-desc { font-size: 12px; line-height: 1.65; }
 
       #booking { padding: 80px 0; }
       .booking-form-card { padding: 28px 20px; }
@@ -1828,39 +1834,35 @@
 <section id="why" aria-label="Почему выбирают нас">
   <div class="container">
     <div class="why-head">
-      <span class="section-eyebrow reveal" data-i18n="why.eyebrow">Наши преимущества</span>
-      <h2 class="section-title reveal reveal-delay-1" data-i18n="why.title">Почему выбирают нас</h2>
+      <p class="why-lead reveal" data-i18n="why.lead">Край, где земля встречает вечность!</p>
+      <p class="why-intro reveal reveal-delay-1" data-i18n="why.intro">Мы открываем Мангистау с тех сторон, куда не доходят обычные маршруты. Труднодоступные каньоны, древние некрополи, дикое побережье Каспия и марсианские пейзажи — всё это в рамках одного путешествия.</p>
+      <span class="section-eyebrow reveal reveal-delay-1" data-i18n="why.eyebrow">Наши преимущества</span>
+      <h2 class="section-title reveal reveal-delay-2" data-i18n="why.title">Почему выбирают нас</h2>
     </div>
     <div class="why-grid">
 
       <div class="why-card reveal">
-        <div class="why-icon"><img src="why-icon-1.svg" alt="Опытные гиды"></div>
+        <div class="why-num">- 1 -</div>
         <h3 class="why-title" data-i18n="why.1.t">Опытные гиды</h3>
         <p class="why-desc" data-i18n="why.1.d">Местные проводники, знающие каждый камень Мангистау. Ваша безопасность — наш главный приоритет на маршруте.</p>
       </div>
 
       <div class="why-card reveal reveal-delay-1">
-        <div class="why-icon"><img src="why-icon-2.svg" alt="Надёжный транспорт"></div>
+        <div class="why-num">- 2 -</div>
         <h3 class="why-title" data-i18n="why.2.t">Надёжный транспорт</h3>
         <p class="why-desc" data-i18n="why.2.d">Подготовленные внедорожники 4×4 для любого бездорожья. Добираемся туда, куда не проедет обычный автомобиль.</p>
       </div>
 
       <div class="why-card reveal reveal-delay-2">
-        <div class="why-icon"><img src="why-icon-3.svg" alt="Комфорт в пустыне"></div>
+        <div class="why-num">- 3 -</div>
         <h3 class="why-title" data-i18n="why.3.t">Комфорт в пустыне</h3>
         <p class="why-desc" data-i18n="why.3.d">Качественное снаряжение, домашняя еда и уютные ночлеги под самым звёздным небом в жизни.</p>
       </div>
 
-      <div class="why-card reveal">
-        <div class="why-icon"><img src="why-icon-4.svg" alt="Лучшие ракурсы"></div>
+      <div class="why-card reveal reveal-delay-3">
+        <div class="why-num">- 4 -</div>
         <h3 class="why-title" data-i18n="why.4.t">Лучшие ракурсы</h3>
         <p class="why-desc" data-i18n="why.4.d">Знаем «золотые часы» и точки для идеальных кадров. Вернётесь с фотографиями, от которых перехватывает дыхание.</p>
-      </div>
-
-      <div class="why-card reveal reveal-delay-1">
-        <div class="why-icon"><img src="why-icon-5.svg" alt="Честные цены"></div>
-        <h3 class="why-title" data-i18n="why.5.t">Честные цены</h3>
-        <p class="why-desc" data-i18n="why.5.d">Прозрачное ценообразование без скрытых платежей. Вы платите ровно столько, сколько обсудили при бронировании.</p>
       </div>
 
     </div>
@@ -2177,6 +2179,7 @@
         'route.dolina':'Valley of Balls','route.sherkala':'Mount Sherkala','route.tuzbair':'Tuzbair Tract','route.bozgyra':'Bozzhyra Tract',
         'route.distance':'Distance','route.type':'Route type','route.duration':'Duration','route.book':'Book',
         'val.jeep':'Off-road 4×4','val.d170':'170 km from Aktau','val.d220':'220 km from Aktau','val.d250':'250 km from Aktau','val.d350':'350 km from Aktau','val.dur12':'1–2 days','val.dur23':'2–3 days',
+        'why.lead':'A land where earth meets eternity!','why.intro':'We open up Mangystau from the sides ordinary routes never reach. Remote canyons, ancient necropolises, the wild Caspian coast and Martian landscapes — all within a single journey.',
         'why.eyebrow':'Our advantages','why.title':'Why choose us',
         'why.1.t':'Experienced guides','why.1.d':'Local guides who know every stone of Mangystau. Your safety is our top priority on the route.',
         'why.2.t':'Reliable vehicles','why.2.d':'Prepared 4×4 off-roaders for any terrain. We reach places a regular car cannot.',
@@ -2204,6 +2207,7 @@
         'route.dolina':'Tal der Kugeln','route.sherkala':'Berg Scherkala','route.tuzbair':'Tuzbair-Gebiet','route.bozgyra':'Bozzhyra-Gebiet',
         'route.distance':'Entfernung','route.type':'Routentyp','route.duration':'Dauer','route.book':'Buchen',
         'val.jeep':'Offroad 4×4','val.d170':'170 km von Aktau','val.d220':'220 km von Aktau','val.d250':'250 km von Aktau','val.d350':'350 km von Aktau','val.dur12':'1–2 Tage','val.dur23':'2–3 Tage',
+        'why.lead':'Ein Land, wo die Erde auf die Ewigkeit trifft!','why.intro':'Wir erschließen Mangystau von Seiten, die gewöhnliche Routen nie erreichen. Abgelegene Canyons, antike Nekropolen, die wilde Kaspi-Küste und marsianische Landschaften — alles auf einer einzigen Reise.',
         'why.eyebrow':'Unsere Vorteile','why.title':'Warum uns wählen',
         'why.1.t':'Erfahrene Guides','why.1.d':'Lokale Guides, die jeden Stein von Mangystau kennen. Ihre Sicherheit ist unsere oberste Priorität.',
         'why.2.t':'Zuverlässige Fahrzeuge','why.2.d':'Ausgerüstete 4×4-Geländewagen für jedes Gelände. Wir erreichen Orte, die ein normales Auto nicht schafft.',
@@ -2231,6 +2235,7 @@
         'route.dolina':'Vallée des Boules','route.sherkala':'Mont Sherkala','route.tuzbair':'Site de Tuzbair','route.bozgyra':'Site de Bozzhyra',
         'route.distance':'Distance','route.type':'Type d’itinéraire','route.duration':'Durée','route.book':'Réserver',
         'val.jeep':'4×4 tout-terrain','val.d170':'170 km d’Aktau','val.d220':'220 km d’Aktau','val.d250':'250 km d’Aktau','val.d350':'350 km d’Aktau','val.dur12':'1–2 jours','val.dur23':'2–3 jours',
+        'why.lead':'Une terre où le sol rencontre l\'éternité !','why.intro':'Nous révélons le Mangystau sous des angles que les itinéraires ordinaires n\'atteignent jamais. Canyons reculés, nécropoles anciennes, côte sauvage de la Caspienne et paysages martiens — le tout en un seul voyage.',
         'why.eyebrow':'Nos avantages','why.title':'Pourquoi nous choisir',
         'why.1.t':'Guides expérimentés','why.1.d':'Des guides locaux qui connaissent chaque pierre du Mangystau. Votre sécurité est notre priorité.',
         'why.2.t':'Transport fiable','why.2.d':'Des 4×4 préparés pour tout terrain. Nous atteignons là où une voiture ordinaire ne passe pas.',
