@@ -377,6 +377,17 @@
     }
     /* Layer A visible by default (fallback if JS is off) */
     #heroVidA { opacity: 1; }
+    /* Mobile hero still image — hidden on desktop (video is used there) */
+    .hero-mobile-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      pointer-events: none;
+      display: none;
+    }
     .hero-overlay {
       position: absolute;
       inset: 0;
@@ -1196,7 +1207,9 @@
       .nav-burger { display: flex; }
       .nav-chat { display: block; }
 
-      /* Hero — pull the eyebrow down closer to the MANGISTAU title */
+      /* Hero — show still image instead of the video on mobile */
+      .hero-video { display: none; }
+      .hero-mobile-img { display: block; }
       /* Hero title — text block pulled up near the sky, tight + large */
       #plx-title { display: none; }
       .hero-eyebrow { top: 15%; }
@@ -1545,6 +1558,7 @@
   <video class="hero-video" id="heroVidB" muted playsinline preload="none" poster="BG/hero-poster.jpg" aria-hidden="true">
     <source src="NEW%20HERO.mp4" type="video/mp4">
   </video>
+  <img class="hero-mobile-img" src="BG/hero-mobile.jpg" alt="Скалы Мангистау" aria-hidden="true">
   <div class="hero-overlay" aria-hidden="true"></div>
   <div class="plx" id="plx-title" aria-hidden="true"></div>
 
