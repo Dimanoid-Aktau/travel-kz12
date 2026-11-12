@@ -395,7 +395,7 @@
       background-repeat: no-repeat;
       pointer-events: none;
     }
-    #plx-title { z-index: 2; background-image: url("BG/MANGISTAU.png"); background-size: 72% auto; background-position: center 52%; }
+    #plx-title { display: none; }
 
     .hero-eyebrow {
       position: absolute;
@@ -416,9 +416,12 @@
     }
     /* Text MANGISTAU title — shown on mobile instead of the PNG layer */
     .hero-title-mob {
-      display: none;
+      display: block;
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
+      font-size: clamp(46px, 8vw, 120px);
+      letter-spacing: 2px;
+      margin-top: 8px;
       text-transform: uppercase;
       color: var(--white);
       line-height: 1;
@@ -1533,7 +1536,7 @@
 
   <div class="hero-eyebrow">
     <h1 class="hero-eyebrow-text" data-i18n="hero.eyebrow">ТУРЫ ПО</h1>
-    <div class="hero-title-mob" aria-hidden="true">МАНГИСТАУ</div>
+    <div class="hero-title-mob" data-i18n="hero.mang">МАНГИСТАУ</div>
   </div>
   <div class="hero-cta">
     <a href="#booking" class="hero-btn fbtn">
@@ -2138,7 +2141,7 @@
     const T = {
       en: {
         'nav.routes':'Routes','nav.about':'About us','nav.gallery':'Gallery','nav.booking':'Booking','nav.contacts':'Contacts','nav.book':'Book now',
-        'hero.eyebrow':'TOURS OF','hero.book':'Book now','hero.scroll':'Scroll',
+        'hero.eyebrow':'TOURS OF','hero.mang':'MANGYSTAU','hero.book':'Book now','hero.scroll':'Scroll',
         'stats.guests':'Happy guests','stats.routes':'Routes','stats.years':'Years of experience',
         'routes.eyebrow':'Our routes','routes.title':'Legends of<br>Mangystau','routes.desc':'Four unique locations — each a universe of its own.<br>Choose your path.',
         'route.dolina':'Valley of Balls','route.sherkala':'Mount Sherkala','route.tuzbair':'Tuzbair Tract','route.bozgyra':'Bozzhyra Tract',
@@ -2165,7 +2168,7 @@
       },
       de: {
         'nav.routes':'Routen','nav.about':'Über uns','nav.gallery':'Galerie','nav.booking':'Buchung','nav.contacts':'Kontakt','nav.book':'Jetzt buchen',
-        'hero.eyebrow':'TOUREN DURCH','hero.book':'Jetzt buchen','hero.scroll':'Scrollen',
+        'hero.eyebrow':'TOUREN DURCH','hero.mang':'MANGYSTAU','hero.book':'Jetzt buchen','hero.scroll':'Scrollen',
         'stats.guests':'Zufriedene Gäste','stats.routes':'Routen','stats.years':'Jahre Erfahrung',
         'routes.eyebrow':'Unsere Routen','routes.title':'Legenden von<br>Mangystau','routes.desc':'Vier einzigartige Orte — jeder ein eigenes Universum.<br>Wähle deinen Weg.',
         'route.dolina':'Tal der Kugeln','route.sherkala':'Berg Scherkala','route.tuzbair':'Tuzbair-Gebiet','route.bozgyra':'Bozzhyra-Gebiet',
@@ -2192,7 +2195,7 @@
       },
       fr: {
         'nav.routes':'Itinéraires','nav.about':'À propos','nav.gallery':'Galerie','nav.booking':'Réservation','nav.contacts':'Contact','nav.book':'Réserver',
-        'hero.eyebrow':'TOURS DU','hero.book':'Réserver','hero.scroll':'Défiler',
+        'hero.eyebrow':'TOURS DU','hero.mang':'MANGYSTAU','hero.book':'Réserver','hero.scroll':'Défiler',
         'stats.guests':'Clients satisfaits','stats.routes':'Itinéraires','stats.years':'Ans d’expérience',
         'routes.eyebrow':'Nos itinéraires','routes.title':'Légendes du<br>Mangystau','routes.desc':'Quatre lieux uniques — chacun un univers à part.<br>Choisis ta voie.',
         'route.dolina':'Vallée des Boules','route.sherkala':'Mont Sherkala','route.tuzbair':'Site de Tuzbair','route.bozgyra':'Site de Bozzhyra',
