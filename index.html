@@ -278,6 +278,56 @@
     #nav-mobile a:hover { color: var(--ochre); }
     #nav-mobile .nav-book-btn { font-size: 14px; padding: 14px 40px; margin-top: 12px; }
 
+    /* Mobile chat FAB → expands to WhatsApp / Instagram */
+    .nav-chat { display: none; position: relative; flex-shrink: 0; }
+    .nav-chat-toggle {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      border: none;
+      background: var(--terra);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0,0,0,.28);
+      transition: background .25s, transform .25s;
+    }
+    .nav-chat-toggle svg { width: 21px; height: 21px; }
+    .nav-chat.open .nav-chat-toggle { background: var(--navy); transform: rotate(90deg); }
+    .nav-chat-menu {
+      position: absolute;
+      top: calc(100% + 12px);
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      opacity: 0;
+      transform: translateY(-8px) scale(.9);
+      transform-origin: top right;
+      pointer-events: none;
+      transition: opacity .25s ease, transform .25s ease;
+    }
+    .nav-chat.open .nav-chat-menu {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+    .nav-chat-menu a {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(0,0,0,.24);
+      transition: transform .2s;
+    }
+    .nav-chat-menu a:hover { transform: scale(1.08); }
+    .nav-chat-menu a svg { width: 21px; height: 21px; }
+    .nav-chat-wa { background: #25D366; }
+    .nav-chat-ig { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+
     /* ============================================================
        HERO — 4-LAYER PARALLAX
     ============================================================ */
@@ -432,7 +482,7 @@
        ROUTES SECTION — FOG / WATERCOLOR STYLE
     ============================================================ */
     #routes {
-      background: #ffffff;
+      background: #FCF8F5;
       padding: 100px 0 60px;
       position: relative;
       overflow: hidden;
@@ -1091,10 +1141,16 @@
        RESPONSIVE — MOBILE (≤768px)
     ============================================================ */
     @media (max-width: 768px) {
-      #nav, #nav.solid { padding: 16px 20px; }
-      .nav-logo img { height: 40px; }
-      .nav-links, .nav-book-btn, .nav-social { display: none; }
+      #nav, #nav.solid { padding: 14px 18px; }
+      .nav-logo img { height: 34px; }
+      .nav-links, .nav-right { display: none; }
       .nav-burger { display: flex; }
+      .nav-chat { display: block; }
+
+      /* Hero — pull the eyebrow down closer to the MANGISTAU title */
+      .hero-eyebrow { top: 38%; }
+      .hero-eyebrow-text { font-size: clamp(24px, 7vw, 40px); letter-spacing: 4px; }
+      .hero-cta { bottom: 10%; }
 
       .container { padding: 0 20px; }
 
@@ -1114,9 +1170,17 @@
       .route-img-area img { height: auto; }
       .route-text { padding: 20px 0 0; }
 
-      .why-grid { flex-wrap: wrap; gap: 16px; }
-      .why-card { flex: 0 1 calc(50% - 8px); }
-      #why { padding: 80px 0; }
+      #why { padding: 72px 0; }
+      .why-head { margin-bottom: 40px; }
+      .why-grid { flex-wrap: wrap; gap: 12px; }
+      .why-card {
+        flex: 0 1 calc(50% - 6px);
+        padding: 24px 16px 22px;
+        border-radius: 16px;
+      }
+      .why-icon { width: 46px; height: 46px; margin-bottom: 14px; }
+      .why-title { font-size: 13px; letter-spacing: .8px; margin-bottom: 9px; }
+      .why-desc { font-size: 12px; line-height: 1.6; }
 
       #booking { padding: 80px 0; }
       .booking-form-card { padding: 28px 20px; }
@@ -1134,7 +1198,7 @@
     }
 
     @media (max-width: 480px) {
-      .nav-logo img { height: 36px; }
+      .nav-logo img { height: 30px; }
       .stat-item { flex: 1 1 100%; border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); }
       .stat-item:last-child { border-bottom: none; }
     }
@@ -1329,6 +1393,19 @@
   <button class="nav-burger" id="burger" aria-label="Открыть меню" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
+  <div class="nav-chat" id="navChat">
+    <button class="nav-chat-toggle" id="navChatToggle" aria-label="Связаться" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+    </button>
+    <div class="nav-chat-menu" id="navChatMenu">
+      <a class="nav-chat-wa" href="https://wa.me/77016442444" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.82 9.82 0 001.519 5.267l-.999 3.648 3.569-.771zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.074-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+      </a>
+      <a class="nav-chat-ig" href="https://www.instagram.com/travel_kz12" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>
+      </a>
+    </div>
+  </div>
 </nav>
 
 <!-- Mobile menu -->
@@ -1378,9 +1455,9 @@
     <h1 class="hero-eyebrow-text">ТУРЫ ПО</h1>
   </div>
   <div class="hero-cta">
-    <a href="#contacts" class="hero-btn fbtn">
+    <a href="#booking" class="hero-btn fbtn">
       <svg class="farr-l" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      <span class="ftxt">Связаться с нами</span>
+      <span class="ftxt">Забронировать</span>
       <span class="fblob"></span>
       <svg class="farr-r" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
@@ -1471,7 +1548,7 @@
       <div class="stat-label">Лет опыта</div>
     </div>
   </div>
-  <div class="tear" style="color:#ffffff"><svg class="tear-svg"><use href="#tearShape"/></svg></div>
+  <div class="tear" style="color:#FCF8F5"><svg class="tear-svg"><use href="#tearShape"/></svg></div>
 </section>
 
 <!-- ============================================================
@@ -1983,6 +2060,23 @@
   });
   document.querySelectorAll('.mob-link').forEach(a => a.addEventListener('click', closeMenu));
   mobileNav.addEventListener('click', e => { if (e.target === mobileNav) closeMenu(); });
+
+  /* ── Mobile chat FAB (WhatsApp / Instagram) ── */
+  const navChat = document.getElementById('navChat');
+  const navChatToggle = document.getElementById('navChatToggle');
+  if (navChat && navChatToggle) {
+    navChatToggle.addEventListener('click', e => {
+      e.stopPropagation();
+      const open = navChat.classList.toggle('open');
+      navChatToggle.setAttribute('aria-expanded', String(open));
+    });
+    document.addEventListener('click', e => {
+      if (!navChat.contains(e.target)) {
+        navChat.classList.remove('open');
+        navChatToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
 
   /* ── Reveal on scroll ── */
   const io = new IntersectionObserver((entries) => {
