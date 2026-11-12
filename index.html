@@ -388,6 +388,20 @@
       pointer-events: none;
       display: none;
     }
+    /* Mobile parallax foreground — rocks cut out (transparent sky),
+       sits IN FRONT of the title so the text slides behind the peaks */
+    .hero-fg-mobile {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 5;
+      pointer-events: none;
+      display: none;
+      will-change: transform;
+    }
     .hero-overlay {
       position: absolute;
       inset: 0;
@@ -1213,11 +1227,13 @@
       /* Hero — show still image instead of the video on mobile */
       .hero-video { display: none; }
       .hero-mobile-img { display: block; }
+      .hero-fg-mobile { display: block; }
       /* No darkening over the hero photo on mobile */
       .hero-overlay { display: none; }
-      /* Hero title — text block pulled up near the sky, tight + large */
+      /* Hero title — text block pulled up near the sky, tight + large.
+         z-index 2 keeps it behind the foreground rocks (z-index 5) for parallax */
       #plx-title { display: none; }
-      .hero-eyebrow { top: 22%; }
+      .hero-eyebrow { top: 22%; z-index: 2; }
       .hero-eyebrow-text {
         font-size: clamp(26px, 8vw, 44px);
         letter-spacing: 5px;
@@ -1567,6 +1583,7 @@
     <source src="NEW%20HERO.mp4" type="video/mp4">
   </video>
   <img class="hero-mobile-img" src="BG/hero-mobile.jpg" alt="Скалы Мангистау" aria-hidden="true">
+  <img class="hero-fg-mobile" src="BG/hero-fg.webp" alt="" aria-hidden="true">
   <div class="hero-overlay" aria-hidden="true"></div>
   <div class="plx" id="plx-title" aria-hidden="true"></div>
 
@@ -2450,6 +2467,31 @@
         show(dx < 0 ? idx + 1 : idx - 1);
       }
     }, { passive: true });
+  })();
+
+  /* ── Mobile hero parallax: title sinks behind the rocks on scroll ── */
+  (function () {
+    const eyebrow = document.querySelector('.hero-eyebrow');
+    const hero = document.getElementById('hero');
+    if (!eyebrow || !hero) return;
+    const mq = window.matchMedia('(max-width: 768px)');
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      if (!mq.matches) { eyebrow.style.transform = ''; eyebrow.style.opacity = ''; return; }
+      const y = window.pageYOffset || document.documentElement.scrollTop || 0;
+      const vh = window.innerHeight || 1;
+      const p = Math.min(y / vh, 1);           // 0 at top → 1 after one screen
+      // Keep the horizontal centering (translateX -50%) and add the parallax drift:
+      // the title moves up slower than the page, so the rocks rise and cover it.
+      eyebrow.style.transform = 'translateX(-50%) translateY(' + (y * 0.75) + 'px)';
+      eyebrow.style.opacity = String(1 - p * 0.5);
+    };
+    const onScroll = () => { if (!ticking) { requestAnimationFrame(update); ticking = true; } };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    if (mq.addEventListener) mq.addEventListener('change', update);
+    update();
   })();
 
   /* ── Booking form ── */
