@@ -1220,6 +1220,9 @@
       .routes-head { margin-bottom: 50px; }
       .tear { height: 48px; }
       .routes-path-svg { display: none; }
+      /* Hide the connector dots + dashed lines between cards on mobile */
+      .route-row::after,
+      .route-row::before { display: none !important; }
       .route-row {
         grid-template-columns: 1fr !important;
         min-height: auto;
