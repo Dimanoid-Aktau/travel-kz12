@@ -1048,6 +1048,31 @@
       }
       .route-img-area,
       .route-img-area img { height: auto; }
+
+      /* Vertical dotted journey path connecting the stacked rows */
+      .route-row:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -48px;
+        height: 48px;
+        border-left: 2px dashed #c8c0b8;
+        z-index: 0;
+      }
+      .route-row:not(:last-child)::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -31px;
+        transform: translateX(-50%);
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: var(--terra);
+        box-shadow: 0 0 0 5px rgba(192,90,62,.16);
+        z-index: 2;
+      }
     }
 
     /* ============================================================
