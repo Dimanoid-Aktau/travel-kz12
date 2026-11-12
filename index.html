@@ -230,6 +230,29 @@
       transform: translateY(-2px);
     }
     .nav-social svg { width: 17px; height: 17px; }
+    /* Language switcher */
+    .lang-switch { display: flex; align-items: center; gap: 2px; }
+    .lang-btn {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,.55);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      cursor: pointer;
+      padding: 5px 7px;
+      border-radius: 6px;
+      transition: color .2s, background .2s;
+    }
+    .lang-btn:hover { color: #fff; }
+    .lang-btn.active { color: #fff; background: rgba(255,255,255,.16); }
+    .lang-switch-mob { margin-top: 26px; gap: 8px; }
+    .lang-switch-mob .lang-btn {
+      font-size: 15px;
+      padding: 8px 14px;
+      border: 1px solid rgba(255,255,255,.2);
+    }
+    .lang-switch-mob .lang-btn.active { background: var(--terra); border-color: transparent; }
     .nav-burger {
       display: none;
       background: none;
@@ -967,8 +990,10 @@
       transform: translateY(-50%);
       width: 50px; height: 50px;
       border-radius: 50%;
+      background: transparent;
+      opacity: .35;
     }
-    .lightbox-nav:hover { background: rgba(255,255,255,.22); }
+    .lightbox-nav:hover { background: transparent; opacity: 1; }
     .lightbox-prev { left: 22px; }
     .lightbox-next { right: 22px; }
     @media (max-width: 768px) {
@@ -1426,12 +1451,18 @@
     <img src="LOGO_TRAVELKZ12.svg" alt="TRAVEL KZ12" height="57" width="auto">
   </a>
   <ul class="nav-links">
-    <li><a href="#routes">Маршруты</a></li>
-    <li><a href="#why">О нас</a></li>
-    <li><a href="#gallery">Галерея</a></li>
-    <li><a href="#contacts">Контакты</a></li>
+    <li><a href="#routes" data-i18n="nav.routes">Маршруты</a></li>
+    <li><a href="#why" data-i18n="nav.about">О нас</a></li>
+    <li><a href="#gallery" data-i18n="nav.gallery">Галерея</a></li>
+    <li><a href="#contacts" data-i18n="nav.contacts">Контакты</a></li>
   </ul>
   <div class="nav-right">
+    <div class="lang-switch" id="langSwitch">
+      <button class="lang-btn" data-lang="ru">RU</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="de">DE</button>
+      <button class="lang-btn" data-lang="fr">FR</button>
+    </div>
     <div class="nav-social">
       <a href="https://wa.me/77016442444" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.82 9.82 0 001.519 5.267l-.999 3.648 3.569-.771zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.074-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
@@ -1442,7 +1473,7 @@
     </div>
     <button class="nav-book-btn fbtn" onclick="jumpTo('#booking')">
       <svg class="farr-l" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      <span class="ftxt">Забронировать</span>
+      <span class="ftxt" data-i18n="nav.book">Забронировать</span>
       <span class="fblob"></span>
       <svg class="farr-r" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </button>
@@ -1467,11 +1498,17 @@
 
 <!-- Mobile menu -->
 <div id="nav-mobile" role="dialog" aria-label="Мобильное меню">
-  <a href="#routes"  class="mob-link">Маршруты</a>
-  <a href="#why"     class="mob-link">О нас</a>
-  <a href="#gallery" class="mob-link">Галерея</a>
-  <a href="#booking" class="mob-link">Бронирование</a>
-  <a href="#contacts" class="mob-link">Контакты</a>
+  <a href="#routes"  class="mob-link" data-i18n="nav.routes">Маршруты</a>
+  <a href="#why"     class="mob-link" data-i18n="nav.about">О нас</a>
+  <a href="#gallery" class="mob-link" data-i18n="nav.gallery">Галерея</a>
+  <a href="#booking" class="mob-link" data-i18n="nav.booking">Бронирование</a>
+  <a href="#contacts" class="mob-link" data-i18n="nav.contacts">Контакты</a>
+  <div class="lang-switch lang-switch-mob">
+    <button class="lang-btn" data-lang="ru">RU</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+    <button class="lang-btn" data-lang="de">DE</button>
+    <button class="lang-btn" data-lang="fr">FR</button>
+  </div>
 </div>
 
 <!-- Reusable organic tear shape for section transitions -->
@@ -1495,18 +1532,18 @@
   <div class="plx" id="plx-title" aria-hidden="true"></div>
 
   <div class="hero-eyebrow">
-    <h1 class="hero-eyebrow-text">ТУРЫ ПО</h1>
+    <h1 class="hero-eyebrow-text" data-i18n="hero.eyebrow">ТУРЫ ПО</h1>
     <div class="hero-title-mob" aria-hidden="true">МАНГИСТАУ</div>
   </div>
   <div class="hero-cta">
     <a href="#booking" class="hero-btn fbtn">
       <svg class="farr-l" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      <span class="ftxt">Забронировать</span>
+      <span class="ftxt" data-i18n="hero.book">Забронировать</span>
       <span class="fblob"></span>
       <svg class="farr-r" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
   </div>
-  <div class="scroll-cue" aria-hidden="true">Скролл</div>
+  <div class="scroll-cue" aria-hidden="true" data-i18n="hero.scroll">Скролл</div>
 
   <!-- Weather Glass Panel -->
   <div id="wx-panel" aria-label="Погода в Актау">
@@ -1581,15 +1618,15 @@
   <div class="stats-inner">
     <div class="stat-item reveal">
       <div class="stat-num">500<span style="color:var(--ochre)">+</span></div>
-      <div class="stat-label">Довольных гостей</div>
+      <div class="stat-label" data-i18n="stats.guests">Довольных гостей</div>
     </div>
     <div class="stat-item reveal reveal-delay-1">
       <div class="stat-num">12</div>
-      <div class="stat-label">Маршрутов</div>
+      <div class="stat-label" data-i18n="stats.routes">Маршрутов</div>
     </div>
     <div class="stat-item reveal reveal-delay-2">
       <div class="stat-num">8</div>
-      <div class="stat-label">Лет опыта</div>
+      <div class="stat-label" data-i18n="stats.years">Лет опыта</div>
     </div>
   </div>
   <div class="tear" style="color:#FCF8F5"><svg class="tear-svg"><use href="#tearShape"/></svg></div>
@@ -1601,9 +1638,9 @@
 <section id="routes" aria-label="Маршруты по Мангистау">
   <div class="container">
     <div class="routes-head">
-      <span class="section-eyebrow reveal">Наши маршруты</span>
-      <h2 class="section-title reveal reveal-delay-1">Легенды<br>Мангистау</h2>
-      <p class="section-desc reveal reveal-delay-2">
+      <span class="section-eyebrow reveal" data-i18n="routes.eyebrow">Наши маршруты</span>
+      <h2 class="section-title reveal reveal-delay-1" data-i18n="routes.title">Легенды<br>Мангистау</h2>
+      <p class="section-desc reveal reveal-delay-2" data-i18n="routes.desc">
         Четыре уникальных локации — каждая отдельная вселенная.<br>Выбери свой путь.
       </p>
     </div>
@@ -1642,21 +1679,21 @@
         </div>
         <div class="route-text">
           <span class="route-row-num">01</span>
-          <h3 class="route-row-name">Долина шаров</h3>
+          <h3 class="route-row-name" data-i18n="route.dolina">Долина шаров</h3>
           <div class="route-row-meta">
             <div class="route-row-meta-item">
-              <strong>Расстояние</strong>170 км от Актау
+              <strong data-i18n="route.distance">Расстояние</strong><span data-i18n="val.d170">170 км от Актау</span>
             </div>
             <div class="route-row-meta-item">
-              <strong>Тип маршрута</strong>Джиппинг 4×4
+              <strong data-i18n="route.type">Тип маршрута</strong><span data-i18n="val.jeep">Джиппинг 4×4</span>
             </div>
             <div class="route-row-meta-item">
-              <strong>Продолжительность</strong>1–2 дня
+              <strong data-i18n="route.duration">Продолжительность</strong><span data-i18n="val.dur12">1–2 дня</span>
             </div>
           </div>
           <a href="#booking" class="route-row-btn fbtn">
             <svg class="farr-l" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            <span class="ftxt">Забронировать</span>
+            <span class="ftxt" data-i18n="route.book">Забронировать</span>
             <span class="fblob"></span>
             <svg class="farr-r" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
@@ -1670,21 +1707,21 @@
         </div>
         <div class="route-text">
           <span class="route-row-num">02</span>
-          <h3 class="route-row-name">Гора Шеркала</h3>
+          <h3 class="route-row-name" data-i18n="route.sherkala">Гора Шеркала</h3>
           <div class="route-row-meta">
             <div class="route-row-meta-item">
-              <strong>Расстояние</strong>220 км от Актау
+              <strong data-i18n="route.distance">Расстояние</strong><span data-i18n="val.d220">220 км от Актау</span>
             </div>
             <div class="route-row-meta-item">
-              <strong>Тип маршрута</strong>Джиппинг 4×4
+              <strong data-i18n="route.type">Тип маршрута</strong><span data-i18n="val.jeep">Джиппинг 4×4</span>
             </div>
             <div class="route-row-meta-item">
-              <strong>Продолжительность</strong>1–2 дня
+              <strong data-i18n="route.duration">Продолжительность</strong><span data-i18n="val.dur12">1–2 дня</span>
             </div>
           </div>
           <a href="#booking" class="route-row-btn fbtn">
             <svg class="farr-l" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            <span class="ftxt">Забронировать</span>
+            <span class="ftxt" data-i18n="route.book">Забронировать</span>
             <span class="fblob"></span>
             <svg class="farr-r" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
@@ -1698,21 +1735,21 @@
         </div>
         <div class="route-text">
           <span class="route-row-num">03</span>
-          <h3 class="route-row-name">Урочище Тузбаир</h3>
+          <h3 class="route-row-name" data-i18n="route.tuzbair">Урочище Тузбаир</h3>
           <div class="route-row-meta">
             <div class="route-row-meta-item">
-              <strong>Расстояние</strong>250 км от Актау
+              <strong data-i18n="route.distance">Расстояние</strong><span data-i18n="val.d250">250 км от Актау</span>
             </div>
             <div class="route-row-meta-item">
-              <strong>Тип маршрута</strong>Джиппинг 4×4
+              <strong data-i18n="route.type">Тип маршрута</strong><span data-i18n="val.jeep">Джиппинг 4×4</span>
             </div>
             <div class="route-row-meta-item">
-              <strong>Продолжительность</strong>2–3 дня
+              <strong data-i18n="route.duration">Продолжительность</strong><span data-i18n="val.dur23">2–3 дня</span>
             </div>
           </div>
           <a href="#booking" class="route-row-btn fbtn">
             <svg class="farr-l" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            <span class="ftxt">Забронировать</span>
+            <span class="ftxt" data-i18n="route.book">Забронировать</span>
             <span class="fblob"></span>
             <svg class="farr-r" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
@@ -1726,21 +1763,21 @@
         </div>
         <div class="route-text">
           <span class="route-row-num">04</span>
-          <h3 class="route-row-name">Урочище Бозжыра</h3>
+          <h3 class="route-row-name" data-i18n="route.bozgyra">Урочище Бозжыра</h3>
           <div class="route-row-meta">
             <div class="route-row-meta-item">
-              <strong>Расстояние</strong>350 км от Актау
+              <strong data-i18n="route.distance">Расстояние</strong><span data-i18n="val.d350">350 км от Актау</span>
             </div>
             <div class="route-row-meta-item">
-              <strong>Тип маршрута</strong>Джиппинг 4×4
+              <strong data-i18n="route.type">Тип маршрута</strong><span data-i18n="val.jeep">Джиппинг 4×4</span>
             </div>
             <div class="route-row-meta-item">
-              <strong>Продолжительность</strong>2–3 дня
+              <strong data-i18n="route.duration">Продолжительность</strong><span data-i18n="val.dur23">2–3 дня</span>
             </div>
           </div>
           <a href="#booking" class="route-row-btn fbtn">
             <svg class="farr-l" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            <span class="ftxt">Забронировать</span>
+            <span class="ftxt" data-i18n="route.book">Забронировать</span>
             <span class="fblob"></span>
             <svg class="farr-r" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
@@ -1758,39 +1795,39 @@
 <section id="why" aria-label="Почему выбирают нас">
   <div class="container">
     <div class="why-head">
-      <span class="section-eyebrow reveal">Наши преимущества</span>
-      <h2 class="section-title reveal reveal-delay-1">Почему выбирают нас</h2>
+      <span class="section-eyebrow reveal" data-i18n="why.eyebrow">Наши преимущества</span>
+      <h2 class="section-title reveal reveal-delay-1" data-i18n="why.title">Почему выбирают нас</h2>
     </div>
     <div class="why-grid">
 
       <div class="why-card reveal">
         <div class="why-icon"><img src="why-icon-1.svg" alt="Опытные гиды"></div>
-        <h3 class="why-title">Опытные гиды</h3>
-        <p class="why-desc">Местные проводники, знающие каждый камень Мангистау. Ваша безопасность — наш главный приоритет на маршруте.</p>
+        <h3 class="why-title" data-i18n="why.1.t">Опытные гиды</h3>
+        <p class="why-desc" data-i18n="why.1.d">Местные проводники, знающие каждый камень Мангистау. Ваша безопасность — наш главный приоритет на маршруте.</p>
       </div>
 
       <div class="why-card reveal reveal-delay-1">
         <div class="why-icon"><img src="why-icon-2.svg" alt="Надёжный транспорт"></div>
-        <h3 class="why-title">Надёжный транспорт</h3>
-        <p class="why-desc">Подготовленные внедорожники 4×4 для любого бездорожья. Добираемся туда, куда не проедет обычный автомобиль.</p>
+        <h3 class="why-title" data-i18n="why.2.t">Надёжный транспорт</h3>
+        <p class="why-desc" data-i18n="why.2.d">Подготовленные внедорожники 4×4 для любого бездорожья. Добираемся туда, куда не проедет обычный автомобиль.</p>
       </div>
 
       <div class="why-card reveal reveal-delay-2">
         <div class="why-icon"><img src="why-icon-3.svg" alt="Комфорт в пустыне"></div>
-        <h3 class="why-title">Комфорт в пустыне</h3>
-        <p class="why-desc">Качественное снаряжение, домашняя еда и уютные ночлеги под самым звёздным небом в жизни.</p>
+        <h3 class="why-title" data-i18n="why.3.t">Комфорт в пустыне</h3>
+        <p class="why-desc" data-i18n="why.3.d">Качественное снаряжение, домашняя еда и уютные ночлеги под самым звёздным небом в жизни.</p>
       </div>
 
       <div class="why-card reveal">
         <div class="why-icon"><img src="why-icon-4.svg" alt="Лучшие ракурсы"></div>
-        <h3 class="why-title">Лучшие ракурсы</h3>
-        <p class="why-desc">Знаем «золотые часы» и точки для идеальных кадров. Вернётесь с фотографиями, от которых перехватывает дыхание.</p>
+        <h3 class="why-title" data-i18n="why.4.t">Лучшие ракурсы</h3>
+        <p class="why-desc" data-i18n="why.4.d">Знаем «золотые часы» и точки для идеальных кадров. Вернётесь с фотографиями, от которых перехватывает дыхание.</p>
       </div>
 
       <div class="why-card reveal reveal-delay-1">
         <div class="why-icon"><img src="why-icon-5.svg" alt="Честные цены"></div>
-        <h3 class="why-title">Честные цены</h3>
-        <p class="why-desc">Прозрачное ценообразование без скрытых платежей. Вы платите ровно столько, сколько обсудили при бронировании.</p>
+        <h3 class="why-title" data-i18n="why.5.t">Честные цены</h3>
+        <p class="why-desc" data-i18n="why.5.d">Прозрачное ценообразование без скрытых платежей. Вы платите ровно столько, сколько обсудили при бронировании.</p>
       </div>
 
     </div>
@@ -1805,24 +1842,24 @@
   <div class="container">
     <div class="booking-grid">
       <div class="booking-left">
-        <span class="section-eyebrow reveal">Забронировать</span>
-        <h2 class="section-title reveal reveal-delay-1">Начни своё<br>приключение</h2>
-        <p class="section-desc reveal reveal-delay-2">
+        <span class="section-eyebrow reveal" data-i18n="booking.eyebrow">Забронировать</span>
+        <h2 class="section-title reveal reveal-delay-1" data-i18n="booking.title">Начни своё<br>приключение</h2>
+        <p class="section-desc reveal reveal-delay-2" data-i18n="booking.desc">
           Оставь заявку — и мы свяжемся с тобой в течение&nbsp;2&nbsp;часов,
           чтобы подобрать идеальный тур.
         </p>
         <div class="booking-features">
           <div class="booking-feat reveal reveal-delay-1">
             <div class="booking-feat-icon" aria-hidden="true">✓</div>
-            Индивидуальный и групповой формат
+            <span data-i18n="booking.feat1">Индивидуальный и групповой формат</span>
           </div>
           <div class="booking-feat reveal reveal-delay-2">
             <div class="booking-feat-icon" aria-hidden="true">✓</div>
-            Трансфер из Актау включён
+            <span data-i18n="booking.feat2">Трансфер из Актау включён</span>
           </div>
           <div class="booking-feat reveal reveal-delay-3">
             <div class="booking-feat-icon" aria-hidden="true">✓</div>
-            Гибкая программа под ваши пожелания
+            <span data-i18n="booking.feat3">Гибкая программа под ваши пожелания</span>
           </div>
         </div>
       </div>
@@ -1831,52 +1868,52 @@
         <form id="bookingForm" novalidate>
           <div class="form-row">
             <div class="form-group">
-              <label for="f-name">Имя</label>
-              <input type="text" id="f-name" name="name" placeholder="Ваше имя" required autocomplete="given-name">
+              <label for="f-name" data-i18n="form.name">Имя</label>
+              <input type="text" id="f-name" name="name" placeholder="Ваше имя" data-i18n-ph="ph.name" required autocomplete="given-name">
             </div>
             <div class="form-group">
-              <label for="f-phone">Телефон</label>
+              <label for="f-phone" data-i18n="form.phone">Телефон</label>
               <input type="tel" id="f-phone" name="phone" placeholder="+7 (___) ___-__-__" required autocomplete="tel">
             </div>
           </div>
           <div class="form-group">
-            <label for="f-email">Email</label>
+            <label for="f-email" data-i18n="form.email">Email</label>
             <input type="email" id="f-email" name="email" placeholder="your@email.com" autocomplete="email">
           </div>
           <div class="form-group">
-            <label for="f-tour">Маршрут</label>
+            <label for="f-tour" data-i18n="form.tour">Маршрут</label>
             <select id="f-tour" name="tour">
-              <option value="">— Выберите маршрут —</option>
-              <option value="dolina">Долина шаров</option>
-              <option value="sherkala">Гора Шеркала</option>
-              <option value="tuzbair">Урочище Тузбаир</option>
-              <option value="bozgyra">Урочище Бозжыра</option>
-              <option value="combo2">Комбо: 2 локации</option>
-              <option value="combo4">Гранд-тур: все 4 локации</option>
+              <option value="" data-i18n="form.opt0">— Выберите маршрут —</option>
+              <option value="dolina" data-i18n="route.dolina">Долина шаров</option>
+              <option value="sherkala" data-i18n="route.sherkala">Гора Шеркала</option>
+              <option value="tuzbair" data-i18n="route.tuzbair">Урочище Тузбаир</option>
+              <option value="bozgyra" data-i18n="route.bozgyra">Урочище Бозжыра</option>
+              <option value="combo2" data-i18n="form.combo2">Комбо: 2 локации</option>
+              <option value="combo4" data-i18n="form.combo4">Гранд-тур: все 4 локации</option>
             </select>
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label for="f-date">Желаемая дата</label>
+              <label for="f-date" data-i18n="form.date">Желаемая дата</label>
               <input type="date" id="f-date" name="date">
             </div>
             <div class="form-group">
-              <label for="f-people">Количество человек</label>
+              <label for="f-people" data-i18n="form.people">Количество человек</label>
               <input type="number" id="f-people" name="people" min="1" max="20" placeholder="2">
             </div>
           </div>
           <div class="form-group">
-            <label for="f-comment">Пожелания</label>
-            <textarea id="f-comment" name="comment" rows="3" placeholder="Расскажите о своих пожеланиях..."></textarea>
+            <label for="f-comment" data-i18n="form.comment">Пожелания</label>
+            <textarea id="f-comment" name="comment" rows="3" placeholder="Расскажите о своих пожеланиях..." data-i18n-ph="ph.comment"></textarea>
           </div>
-          <p class="form-privacy">
+          <p class="form-privacy" data-i18n="form.privacy">
             Заполняя данные, вы автоматически соглашаетесь с условиями
             <a href="#privacy">политики конфиденциальности</a>.
             Мы гарантируем безопасность ваших данных.
           </p>
           <button type="submit" class="form-submit fbtn" id="submitBtn">
             <svg class="farr-l" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            <span class="ftxt">Забронировать тур</span>
+            <span class="ftxt" data-i18n="form.submit">Забронировать тур</span>
             <span class="fblob"></span>
             <svg class="farr-r" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </button>
@@ -1894,10 +1931,10 @@
   <div class="container">
     <div class="gallery-head">
       <div>
-        <span class="section-eyebrow reveal">Галерея</span>
-        <h2 class="section-title reveal reveal-delay-1">Вдохновляющие<br>кадры</h2>
+        <span class="section-eyebrow reveal" data-i18n="gallery.eyebrow">Галерея</span>
+        <h2 class="section-title reveal reveal-delay-1" data-i18n="gallery.title">Вдохновляющие<br>кадры</h2>
       </div>
-      <p class="gallery-note reveal">
+      <p class="gallery-note reveal" data-i18n="gallery.note">
         Снимки из наших экспедиций по Мангистау — наведите на кадр, чтобы оживить его.
       </p>
     </div>
@@ -2013,7 +2050,7 @@
         <div class="nav-logo">
           <img src="LOGO_TRAVELKZ12.svg" alt="TRAVEL KZ12" height="44" width="auto">
         </div>
-        <p>Профессиональные туры по Мангистау. Открываем дикую красоту Казахстана с 2016 года. Работаем из Актау.</p>
+        <p data-i18n="footer.brand">Профессиональные туры по Мангистау. Открываем дикую красоту Казахстана с 2016 года. Работаем из Актау.</p>
         <div class="footer-social">
           <a href="https://wa.me/77016442444" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
             <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.82 9.82 0 001.519 5.267l-.999 3.648 3.569-.771zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.074-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
@@ -2024,36 +2061,36 @@
         </div>
       </div>
       <div class="footer-col">
-        <h4>Маршруты</h4>
+        <h4 data-i18n="footer.col.routes">Маршруты</h4>
         <ul>
-          <li><a href="#routes">Долина шаров</a></li>
-          <li><a href="#routes">Гора Шеркала</a></li>
-          <li><a href="#routes">Урочище Тузбаир</a></li>
-          <li><a href="#routes">Урочище Бозжыра</a></li>
-          <li><a href="#booking">Гранд-тур</a></li>
+          <li><a href="#routes" data-i18n="route.dolina">Долина шаров</a></li>
+          <li><a href="#routes" data-i18n="route.sherkala">Гора Шеркала</a></li>
+          <li><a href="#routes" data-i18n="route.tuzbair">Урочище Тузбаир</a></li>
+          <li><a href="#routes" data-i18n="route.bozgyra">Урочище Бозжыра</a></li>
+          <li><a href="#booking" data-i18n="footer.grandtour">Гранд-тур</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Компания</h4>
+        <h4 data-i18n="footer.col.company">Компания</h4>
         <ul>
-          <li><a href="#why">О нас</a></li>
-          <li><a href="#gallery">Галерея</a></li>
-          <li><a href="#booking">Бронирование</a></li>
-          <li><a href="#privacy">Конфиденциальность</a></li>
+          <li><a href="#why" data-i18n="nav.about">О нас</a></li>
+          <li><a href="#gallery" data-i18n="nav.gallery">Галерея</a></li>
+          <li><a href="#booking" data-i18n="nav.booking">Бронирование</a></li>
+          <li><a href="#privacy" data-i18n="footer.privacy">Конфиденциальность</a></li>
         </ul>
       </div>
       <div class="footer-col" id="contacts-col">
-        <h4>Контакты</h4>
+        <h4 data-i18n="footer.col.contacts">Контакты</h4>
         <ul>
           <li><a href="tel:+77016442444">+7 701 644 2444</a></li>
           <li><a href="mailto:info@mangistautravel.kz">info@mangistautravel.kz</a></li>
-          <li><a href="#">г. Актау, Казахстан</a></li>
-          <li><a href="#">Пн–Вс: 9:00–21:00</a></li>
+          <li><a href="#" data-i18n="footer.city">г. Актау, Казахстан</a></li>
+          <li><a href="#" data-i18n="footer.hours">Пн–Вс: 9:00–21:00</a></li>
         </ul>
       </div>
     </div>
 
-    <p class="footer-privacy-box" id="privacy">
+    <p class="footer-privacy-box" id="privacy" data-i18n="footer.box">
       Заполняя данные на сайте, вы автоматически соглашаетесь с условиями
       <a href="#">политики конфиденциальности</a>. Мы гарантируем безопасность ваших данных
       и не передаём их третьим лицам без вашего согласия. Персональные данные используются
@@ -2061,8 +2098,8 @@
     </p>
 
     <div class="footer-bottom">
-      <span>© 2024&nbsp;Mangistau Travel. Все права защищены.</span>
-      <span>Туры по Мангистау · Актау · Казахстан</span>
+      <span data-i18n="footer.rights">© 2026&nbsp;TRAVEL_KZ12. Все права защищены.</span>
+      <span data-i18n="footer.tagline">Туры по Мангистау · Актау · Казахстан</span>
     </div>
   </div>
 </footer>
@@ -2095,6 +2132,128 @@
     const el = document.querySelector(selector);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   }
+
+  /* ── i18n: RU (default, from HTML) + EN / DE / FR ── */
+  (function () {
+    const T = {
+      en: {
+        'nav.routes':'Routes','nav.about':'About us','nav.gallery':'Gallery','nav.booking':'Booking','nav.contacts':'Contacts','nav.book':'Book now',
+        'hero.eyebrow':'TOURS OF','hero.book':'Book now','hero.scroll':'Scroll',
+        'stats.guests':'Happy guests','stats.routes':'Routes','stats.years':'Years of experience',
+        'routes.eyebrow':'Our routes','routes.title':'Legends of<br>Mangystau','routes.desc':'Four unique locations — each a universe of its own.<br>Choose your path.',
+        'route.dolina':'Valley of Balls','route.sherkala':'Mount Sherkala','route.tuzbair':'Tuzbair Tract','route.bozgyra':'Bozzhyra Tract',
+        'route.distance':'Distance','route.type':'Route type','route.duration':'Duration','route.book':'Book',
+        'val.jeep':'Off-road 4×4','val.d170':'170 km from Aktau','val.d220':'220 km from Aktau','val.d250':'250 km from Aktau','val.d350':'350 km from Aktau','val.dur12':'1–2 days','val.dur23':'2–3 days',
+        'why.eyebrow':'Our advantages','why.title':'Why choose us',
+        'why.1.t':'Experienced guides','why.1.d':'Local guides who know every stone of Mangystau. Your safety is our top priority on the route.',
+        'why.2.t':'Reliable vehicles','why.2.d':'Prepared 4×4 off-roaders for any terrain. We reach places a regular car cannot.',
+        'why.3.t':'Comfort in the desert','why.3.d':'Quality gear, home-cooked meals and cozy camps under the starriest sky of your life.',
+        'why.4.t':'The best views','why.4.d':'We know the golden hours and spots for perfect shots. You will return with breathtaking photos.',
+        'why.5.t':'Fair prices','why.5.d':'Transparent pricing with no hidden fees. You pay exactly what we agreed at booking.',
+        'booking.eyebrow':'Booking','booking.title':'Start your<br>adventure','booking.desc':'Leave a request — and we will contact you within 2 hours to pick the perfect tour.',
+        'booking.feat1':'Private and group formats','booking.feat2':'Transfer from Aktau included','booking.feat3':'Flexible program to your wishes',
+        'form.name':'Name','form.phone':'Phone','form.email':'Email','form.tour':'Route','form.date':'Preferred date','form.people':'Number of people','form.comment':'Comments',
+        'form.opt0':'— Select a route —','form.combo2':'Combo: 2 locations','form.combo4':'Grand tour: all 4 locations',
+        'form.privacy':'By submitting, you agree to the <a href="#privacy">privacy policy</a>. We guarantee the security of your data.',
+        'form.submit':'Book a tour','ph.name':'Your name','ph.comment':'Tell us your wishes...',
+        'gallery.eyebrow':'Gallery','gallery.title':'Inspiring<br>shots','gallery.note':'Shots from our Mangystau expeditions — hover over a frame to bring it to life.',
+        'footer.brand':'Professional tours across Mangystau. Revealing the wild beauty of Kazakhstan since 2016. Based in Aktau.',
+        'footer.col.routes':'Routes','footer.col.company':'Company','footer.col.contacts':'Contacts',
+        'footer.grandtour':'Grand tour','footer.privacy':'Privacy','footer.city':'Aktau, Kazakhstan','footer.hours':'Mon–Sun: 9:00–21:00',
+        'footer.box':'By submitting data on the site, you automatically agree to the <a href="#">privacy policy</a>. We guarantee the security of your data and never share it with third parties without your consent. Personal data is used solely to contact you about tour bookings.',
+        'footer.rights':'© 2026&nbsp;TRAVEL_KZ12. All rights reserved.','footer.tagline':'Mangystau tours · Aktau · Kazakhstan'
+      },
+      de: {
+        'nav.routes':'Routen','nav.about':'Über uns','nav.gallery':'Galerie','nav.booking':'Buchung','nav.contacts':'Kontakt','nav.book':'Jetzt buchen',
+        'hero.eyebrow':'TOUREN DURCH','hero.book':'Jetzt buchen','hero.scroll':'Scrollen',
+        'stats.guests':'Zufriedene Gäste','stats.routes':'Routen','stats.years':'Jahre Erfahrung',
+        'routes.eyebrow':'Unsere Routen','routes.title':'Legenden von<br>Mangystau','routes.desc':'Vier einzigartige Orte — jeder ein eigenes Universum.<br>Wähle deinen Weg.',
+        'route.dolina':'Tal der Kugeln','route.sherkala':'Berg Scherkala','route.tuzbair':'Tuzbair-Gebiet','route.bozgyra':'Bozzhyra-Gebiet',
+        'route.distance':'Entfernung','route.type':'Routentyp','route.duration':'Dauer','route.book':'Buchen',
+        'val.jeep':'Offroad 4×4','val.d170':'170 km von Aktau','val.d220':'220 km von Aktau','val.d250':'250 km von Aktau','val.d350':'350 km von Aktau','val.dur12':'1–2 Tage','val.dur23':'2–3 Tage',
+        'why.eyebrow':'Unsere Vorteile','why.title':'Warum uns wählen',
+        'why.1.t':'Erfahrene Guides','why.1.d':'Lokale Guides, die jeden Stein von Mangystau kennen. Ihre Sicherheit ist unsere oberste Priorität.',
+        'why.2.t':'Zuverlässige Fahrzeuge','why.2.d':'Ausgerüstete 4×4-Geländewagen für jedes Gelände. Wir erreichen Orte, die ein normales Auto nicht schafft.',
+        'why.3.t':'Komfort in der Wüste','why.3.d':'Hochwertige Ausrüstung, hausgemachtes Essen und gemütliche Nachtlager unter dem sternenreichsten Himmel.',
+        'why.4.t':'Die besten Perspektiven','why.4.d':'Wir kennen die goldenen Stunden und Orte für perfekte Aufnahmen. Sie kehren mit atemberaubenden Fotos zurück.',
+        'why.5.t':'Faire Preise','why.5.d':'Transparente Preise ohne versteckte Kosten. Sie zahlen genau das, was bei der Buchung vereinbart wurde.',
+        'booking.eyebrow':'Buchung','booking.title':'Beginne dein<br>Abenteuer','booking.desc':'Hinterlasse eine Anfrage — und wir melden uns innerhalb von 2 Stunden, um die perfekte Tour zu finden.',
+        'booking.feat1':'Einzel- und Gruppenformat','booking.feat2':'Transfer ab Aktau inklusive','booking.feat3':'Flexibles Programm nach Ihren Wünschen',
+        'form.name':'Name','form.phone':'Telefon','form.email':'E-Mail','form.tour':'Route','form.date':'Wunschdatum','form.people':'Personenzahl','form.comment':'Wünsche',
+        'form.opt0':'— Route wählen —','form.combo2':'Combo: 2 Orte','form.combo4':'Grand Tour: alle 4 Orte',
+        'form.privacy':'Mit dem Absenden stimmen Sie der <a href="#privacy">Datenschutzrichtlinie</a> zu. Wir garantieren die Sicherheit Ihrer Daten.',
+        'form.submit':'Tour buchen','ph.name':'Ihr Name','ph.comment':'Erzählen Sie uns Ihre Wünsche...',
+        'gallery.eyebrow':'Galerie','gallery.title':'Inspirierende<br>Aufnahmen','gallery.note':'Aufnahmen unserer Mangystau-Expeditionen — fahren Sie über ein Bild, um es zu beleben.',
+        'footer.brand':'Professionelle Touren durch Mangystau. Wir zeigen die wilde Schönheit Kasachstans seit 2016. Ansässig in Aktau.',
+        'footer.col.routes':'Routen','footer.col.company':'Unternehmen','footer.col.contacts':'Kontakt',
+        'footer.grandtour':'Grand Tour','footer.privacy':'Datenschutz','footer.city':'Aktau, Kasachstan','footer.hours':'Mo–So: 9:00–21:00',
+        'footer.box':'Mit dem Absenden von Daten auf der Website stimmen Sie automatisch der <a href="#">Datenschutzrichtlinie</a> zu. Wir garantieren die Sicherheit Ihrer Daten und geben sie ohne Ihre Zustimmung nicht an Dritte weiter. Personenbezogene Daten werden ausschließlich für die Kontaktaufnahme zu Buchungen verwendet.',
+        'footer.rights':'© 2026&nbsp;TRAVEL_KZ12. Alle Rechte vorbehalten.','footer.tagline':'Mangystau-Touren · Aktau · Kasachstan'
+      },
+      fr: {
+        'nav.routes':'Itinéraires','nav.about':'À propos','nav.gallery':'Galerie','nav.booking':'Réservation','nav.contacts':'Contact','nav.book':'Réserver',
+        'hero.eyebrow':'TOURS DU','hero.book':'Réserver','hero.scroll':'Défiler',
+        'stats.guests':'Clients satisfaits','stats.routes':'Itinéraires','stats.years':'Ans d’expérience',
+        'routes.eyebrow':'Nos itinéraires','routes.title':'Légendes du<br>Mangystau','routes.desc':'Quatre lieux uniques — chacun un univers à part.<br>Choisis ta voie.',
+        'route.dolina':'Vallée des Boules','route.sherkala':'Mont Sherkala','route.tuzbair':'Site de Tuzbair','route.bozgyra':'Site de Bozzhyra',
+        'route.distance':'Distance','route.type':'Type d’itinéraire','route.duration':'Durée','route.book':'Réserver',
+        'val.jeep':'4×4 tout-terrain','val.d170':'170 km d’Aktau','val.d220':'220 km d’Aktau','val.d250':'250 km d’Aktau','val.d350':'350 km d’Aktau','val.dur12':'1–2 jours','val.dur23':'2–3 jours',
+        'why.eyebrow':'Nos avantages','why.title':'Pourquoi nous choisir',
+        'why.1.t':'Guides expérimentés','why.1.d':'Des guides locaux qui connaissent chaque pierre du Mangystau. Votre sécurité est notre priorité.',
+        'why.2.t':'Transport fiable','why.2.d':'Des 4×4 préparés pour tout terrain. Nous atteignons là où une voiture ordinaire ne passe pas.',
+        'why.3.t':'Confort dans le désert','why.3.d':'Équipement de qualité, cuisine maison et bivouacs confortables sous le ciel le plus étoilé.',
+        'why.4.t':'Les meilleurs angles','why.4.d':'Nous connaissons les heures dorées et les meilleurs spots. Vous reviendrez avec des photos à couper le souffle.',
+        'why.5.t':'Prix honnêtes','why.5.d':'Tarifs transparents sans frais cachés. Vous payez exactement ce qui a été convenu.',
+        'booking.eyebrow':'Réservation','booking.title':'Commence ton<br>aventure','booking.desc':'Laisse une demande — et nous te contacterons sous 2 heures pour choisir le tour idéal.',
+        'booking.feat1':'Format privé et en groupe','booking.feat2':'Transfert depuis Aktau inclus','booking.feat3':'Programme flexible selon vos envies',
+        'form.name':'Nom','form.phone':'Téléphone','form.email':'E-mail','form.tour':'Itinéraire','form.date':'Date souhaitée','form.people':'Nombre de personnes','form.comment':'Remarques',
+        'form.opt0':'— Choisir un itinéraire —','form.combo2':'Combo : 2 lieux','form.combo4':'Grand tour : les 4 lieux',
+        'form.privacy':'En soumettant, vous acceptez la <a href="#privacy">politique de confidentialité</a>. Nous garantissons la sécurité de vos données.',
+        'form.submit':'Réserver un tour','ph.name':'Votre nom','ph.comment':'Dites-nous vos envies...',
+        'gallery.eyebrow':'Galerie','gallery.title':'Clichés<br>inspirants','gallery.note':'Clichés de nos expéditions au Mangystau — survolez une image pour l’animer.',
+        'footer.brand':'Tours professionnels à travers le Mangystau. Nous révélons la beauté sauvage du Kazakhstan depuis 2016. Basés à Aktau.',
+        'footer.col.routes':'Itinéraires','footer.col.company':'Entreprise','footer.col.contacts':'Contact',
+        'footer.grandtour':'Grand tour','footer.privacy':'Confidentialité','footer.city':'Aktaou, Kazakhstan','footer.hours':'Lun–Dim : 9:00–21:00',
+        'footer.box':'En soumettant des données sur le site, vous acceptez automatiquement la <a href="#">politique de confidentialité</a>. Nous garantissons la sécurité de vos données et ne les transmettons jamais à des tiers sans votre consentement. Les données personnelles servent uniquement à vous contacter pour les réservations.',
+        'footer.rights':'© 2026&nbsp;TRAVEL_KZ12. Tous droits réservés.','footer.tagline':'Tours du Mangystau · Aktaou · Kazakhstan'
+      }
+    };
+    const LANGS = ['ru','en','de','fr'];
+    const orig = new Map();
+    const origPh = new Map();
+    document.querySelectorAll('[data-i18n]').forEach(el => orig.set(el, el.innerHTML));
+    document.querySelectorAll('[data-i18n-ph]').forEach(el => origPh.set(el, el.getAttribute('placeholder') || ''));
+
+    function apply(lang) {
+      const dict = T[lang] || {};
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const k = el.getAttribute('data-i18n');
+        el.innerHTML = (lang === 'ru') ? orig.get(el) : (dict[k] != null ? dict[k] : orig.get(el));
+      });
+      document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+        const k = el.getAttribute('data-i18n-ph');
+        el.setAttribute('placeholder', (lang === 'ru') ? origPh.get(el) : (dict[k] != null ? dict[k] : origPh.get(el)));
+      });
+      document.documentElement.lang = lang;
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.getAttribute('data-lang') === lang));
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+    }
+
+    function detect() {
+      try { const s = localStorage.getItem('lang'); if (s && LANGS.includes(s)) return s; } catch (e) {}
+      const langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'ru'];
+      for (const l of langs) {
+        const code = (l || '').slice(0, 2).toLowerCase();
+        if (LANGS.includes(code)) return code;
+      }
+      return 'ru';
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => apply(btn.getAttribute('data-lang')));
+    });
+    apply(detect());
+  })();
 
   /* ── Seamless hero video (crossfade the loop so there is no hard cut) ── */
   (function () {
@@ -2221,6 +2380,19 @@
       else if (e.key === 'ArrowLeft')  show(idx - 1);
       else if (e.key === 'ArrowRight') show(idx + 1);
     });
+    /* Finger swipe between photos */
+    let tsX = 0, tsY = 0;
+    lb.addEventListener('touchstart', (e) => {
+      tsX = e.changedTouches[0].clientX;
+      tsY = e.changedTouches[0].clientY;
+    }, { passive: true });
+    lb.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].clientX - tsX;
+      const dy = e.changedTouches[0].clientY - tsY;
+      if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+        show(dx < 0 ? idx + 1 : idx - 1);
+      }
+    }, { passive: true });
   })();
 
   /* ── Booking form ── */
