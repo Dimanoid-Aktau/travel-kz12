@@ -1143,59 +1143,31 @@
       position: relative;
       display: inline-flex;
       align-items: center;
-      overflow: hidden;
       border-radius: 100px;
       cursor: pointer;
-      transition:
-        border-color  600ms cubic-bezier(.23,1,.32,1),
-        border-radius 600ms cubic-bezier(.23,1,.32,1),
-        color         600ms cubic-bezier(.23,1,.32,1);
+      background: var(--terra);
+      color: #fff;
+      border: none;
+      transition: background .25s ease, transform .1s ease;
     }
-    .fbtn:hover { border-color: transparent; border-radius: 12px; }
-    .fbtn:active { transform: scale(.95); }
+    .fbtn:hover { background: var(--navy); color: #fff; }
+    .fbtn:active { transform: scale(.97); }
     .fbtn:focus-visible { outline: 2px solid var(--ochre); outline-offset: 3px; }
 
-    /* Left arrow — hidden, slides in from left on hover */
-    .fbtn .farr-l {
-      position: absolute;
-      left: -26px; top: 50%; transform: translateY(-50%);
-      z-index: 9;
-      transition: left 800ms cubic-bezier(.34,1.56,.64,1);
-    }
-    .fbtn:hover .farr-l { left: 14px; }
-
-    /* Text label */
+    /* Animation removed — solid button with a static right arrow */
+    .fbtn .farr-l,
+    .fbtn .fblob { display: none; }
     .fbtn .ftxt {
-      position: relative; z-index: 1;
-      transform: translateX(-3px);
-      transition: transform 800ms ease-out;
+      position: relative;
+      z-index: 1;
       white-space: nowrap;
     }
-    .fbtn:hover .ftxt { transform: translateX(3px); }
-
-    /* Expanding blob circle */
-    .fbtn .fblob {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%,-50%);
-      width: 16px; height: 16px;
-      border-radius: 50%;
-      opacity: 0; pointer-events: none;
-      transition:
-        width   800ms cubic-bezier(.19,1,.22,1),
-        height  800ms cubic-bezier(.19,1,.22,1),
-        opacity 400ms ease;
-    }
-    .fbtn:hover .fblob { width: 440px; height: 440px; opacity: 1; }
-
-    /* Right arrow — visible, slides out to right on hover */
     .fbtn .farr-r {
       position: absolute;
-      right: 18px; top: 50%; transform: translateY(-50%);
-      z-index: 9;
-      transition: right 800ms cubic-bezier(.34,1.56,.64,1);
+      right: 18px; top: 50%;
+      transform: translateY(-50%);
+      color: #fff;
     }
-    .fbtn:hover .farr-r { right: -26px; }
 
     /* ============================================================
        WEATHER GLASS PANEL
