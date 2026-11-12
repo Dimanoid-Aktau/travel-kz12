@@ -453,7 +453,6 @@
       text-transform: uppercase;
       color: var(--white);
       line-height: 1;
-      text-shadow: 0 2px 24px rgba(0,0,0,.35);
     }
     .hero-cta {
       position: absolute;
@@ -1233,7 +1232,12 @@
       /* Hero title — text block pulled up near the sky, tight + large.
          z-index 2 keeps it behind the foreground rocks (z-index 5) for parallax */
       #plx-title { display: none; }
-      .hero-eyebrow { top: 22%; z-index: 2; }
+      .hero-eyebrow {
+        top: 22%;
+        z-index: 2;
+        will-change: transform, opacity;
+        backface-visibility: hidden;
+      }
       .hero-eyebrow-text {
         font-size: clamp(26px, 8vw, 44px);
         letter-spacing: 5px;
@@ -2469,29 +2473,33 @@
     }, { passive: true });
   })();
 
-  /* ── Mobile hero parallax: title sinks behind the rocks on scroll ── */
+  /* ── Mobile hero parallax: title sinks behind the rocks on scroll ──
+     Smoothness: instead of reacting to (sparse, janky) scroll events, we run a
+     requestAnimationFrame loop that reads scrollY every frame while the hero is
+     on screen, and move the title with translate3d so it stays on the GPU. */
   (function () {
     const eyebrow = document.querySelector('.hero-eyebrow');
     const hero = document.getElementById('hero');
     if (!eyebrow || !hero) return;
     const mq = window.matchMedia('(max-width: 768px)');
-    let ticking = false;
-    const update = () => {
-      ticking = false;
-      if (!mq.matches) { eyebrow.style.transform = ''; eyebrow.style.opacity = ''; return; }
+    let running = false;
+    const render = () => {
+      if (!mq.matches) { eyebrow.style.transform = ''; eyebrow.style.opacity = ''; running = false; return; }
       const y = window.pageYOffset || document.documentElement.scrollTop || 0;
       const vh = window.innerHeight || 1;
       const p = Math.min(y / vh, 1);           // 0 at top → 1 after one screen
-      // Keep the horizontal centering (translateX -50%) and add the parallax drift:
-      // the title moves up slower than the page, so the rocks rise and cover it.
-      eyebrow.style.transform = 'translateX(-50%) translateY(' + (y * 0.75) + 'px)';
+      // translate3d keeps the horizontal centering (-50%) and adds the parallax
+      // drift; the title moves up slower than the page so the rocks rise over it.
+      eyebrow.style.transform = 'translate3d(-50%,' + (y * 0.75) + 'px,0)';
       eyebrow.style.opacity = String(1 - p * 0.5);
+      if (y <= vh * 1.15) { requestAnimationFrame(render); }   // keep looping while hero is visible
+      else { running = false; }
     };
-    const onScroll = () => { if (!ticking) { requestAnimationFrame(update); ticking = true; } };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', update, { passive: true });
-    if (mq.addEventListener) mq.addEventListener('change', update);
-    update();
+    const start = () => { if (!running) { running = true; requestAnimationFrame(render); } };
+    window.addEventListener('scroll', start, { passive: true });
+    window.addEventListener('resize', start, { passive: true });
+    if (mq.addEventListener) mq.addEventListener('change', start);
+    start();
   })();
 
   /* ── Booking form ── */
