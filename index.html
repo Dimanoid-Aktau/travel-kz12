@@ -288,6 +288,25 @@
       overflow: hidden;
       background: #0a0e14;
     }
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(to bottom,
+        rgba(10,14,20,.45) 0%,
+        rgba(10,14,20,.22) 42%,
+        rgba(10,14,20,.60) 100%);
+    }
     .plx {
       position: absolute;
       top: -15%;
@@ -297,13 +316,9 @@
       background-size: cover;
       background-position: center top;
       background-repeat: no-repeat;
-      will-change: transform;
       pointer-events: none;
     }
-    #plx-bg    { z-index: 1; background-image: url("BG/BG%20%D0%B7%D0%B0%D0%B4%D0%BD%D1%8F%D1%8F%20%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D0%B0.png"); }
     #plx-title { z-index: 2; background-image: url("BG/MANGISTAU.png"); background-size: 72% auto; background-position: center 52%; }
-    #plx-mid   { z-index: 3; background-image: url("BG/BG%20%D1%82%D1%80%D0%B5%D1%82%D1%8C%D1%8F%20%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D0%B0.png"); }
-    #plx-front { z-index: 4; background-image: url("BG/BG%20%D1%87%D0%B5%D1%82%D0%B2%D0%B5%D1%80%D1%82%D0%B0%D1%8F%20%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D0%B0.png"); }
 
     .hero-eyebrow {
       position: absolute;
@@ -1371,10 +1386,11 @@
      HERO — PARALLAX
 ============================================================ -->
 <section id="hero" aria-label="Мангистау — дикая красота Казахстана">
-  <div class="plx" id="plx-bg"    aria-hidden="true"></div>
+  <video class="hero-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="MANGYSTAU.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay" aria-hidden="true"></div>
   <div class="plx" id="plx-title" aria-hidden="true"></div>
-  <div class="plx" id="plx-mid"   aria-hidden="true"></div>
-  <div class="plx" id="plx-front" aria-hidden="true"></div>
 
   <div class="hero-eyebrow">
     <h1 class="hero-eyebrow-text">ТУРЫ ПО</h1>
@@ -1930,44 +1946,6 @@
   function jumpTo(selector) {
     const el = document.querySelector(selector);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
-  }
-
-  /* ── Parallax ── */
-  const hero     = document.getElementById('hero');
-  const plxBg    = document.getElementById('plx-bg');
-  const plxTitle = document.getElementById('plx-title');
-  const plxMid   = document.getElementById('plx-mid');
-  const plxFront = document.getElementById('plx-front');
-
-  /* Coefficient = how much of scroll is compensated (0=normal,1=fixed to viewport).
-     Higher coefficient → element stays in view longer → feels closer.
-     Lower  coefficient → element scrolls upward faster.
-     MANGISTAU (z=2) has LOW coefficient → scrolls up fastest → goes "behind" mountains.
-     Mountains (z=3,4) have HIGH coefficient → stay in view → cover MANGISTAU.         */
-  const PLX = {
-    bg:    0.4,   // rear sky — slow drift
-    title: 0.75,  // MANGISTAU — mostly fixed; mountains rise over it from below
-    mid:   0.1,   // middle mountains — rise fast, cover MANGISTAU's lower half
-    front: 0.22   // foreground — rises fast, slightly slower than mid
-  };
-
-  let rafPending = false;
-  function applyParallax() {
-    rafPending = false;
-    const sy = window.scrollY;
-    if (sy > window.innerHeight * 1.1) return;
-    plxBg.style.transform    = `translateY(${sy * PLX.bg}px)`;
-    plxTitle.style.transform = `translateY(${sy * PLX.title}px)`;
-    plxMid.style.transform   = `translateY(${sy * PLX.mid}px)`;
-    plxFront.style.transform = `translateY(${sy * PLX.front}px)`;
-  }
-
-  /* Skip parallax on reduced-motion or small screens (perf) */
-  const motionOk = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (motionOk) {
-    window.addEventListener('scroll', () => {
-      if (!rafPending) { rafPending = true; requestAnimationFrame(applyParallax); }
-    }, { passive: true });
   }
 
   /* ── Navbar scroll state ── */
