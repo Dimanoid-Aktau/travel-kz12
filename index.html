@@ -167,16 +167,13 @@
       box-shadow: 0 2px 24px rgba(0,0,0,.35);
     }
     .nav-logo {
-      font-size: 18px;
-      font-weight: 900;
-      color: var(--white);
-      letter-spacing: 3px;
-      text-transform: uppercase;
       flex-shrink: 0;
+      display: flex;
+      align-items: center;
     }
-    .nav-logo em {
-      font-style: normal;
-      color: var(--ochre);
+    .nav-logo img {
+      height: 38px;
+      width: auto;
     }
     .nav-links {
       display: flex;
@@ -919,7 +916,8 @@
       border-bottom: 1px solid rgba(255,255,255,.07);
       margin-bottom: 36px;
     }
-    .footer-brand .nav-logo { font-size: 17px; margin-bottom: 16px; }
+    .footer-brand .nav-logo { margin-bottom: 16px; }
+    .footer-brand .nav-logo img { height: 44px; }
     .footer-brand p {
       font-size: 13px;
       line-height: 1.8;
@@ -1251,7 +1249,7 @@
 ============================================================ -->
 <nav id="nav" role="navigation" aria-label="Главное меню">
   <a href="#hero" class="nav-logo" aria-label="MangistauTravel — на главную">
-    MANGISTAU<em>.</em>TRAVEL
+    <img src="logo.svg" alt="MANGISTAU.TRAVEL" height="38" width="auto">
   </a>
   <ul class="nav-links">
     <li><a href="#routes">Маршруты</a></li>
@@ -1780,7 +1778,9 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="nav-logo">MANGISTAU<em>.</em>TRAVEL</div>
+        <div class="nav-logo">
+          <img src="logo.svg" alt="MANGISTAU.TRAVEL" height="44" width="auto">
+        </div>
         <p>Профессиональные туры по Мангистау. Открываем дикую красоту Казахстана с 2016 года. Работаем из Актау.</p>
         <div class="footer-social">
           <a href="https://wa.me/77000000000" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">

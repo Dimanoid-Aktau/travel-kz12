@@ -8,7 +8,9 @@
 # Source / design files (not part of the published site)
 /*.cdr
 /*.docx
+# Exclude all root SVGs except the site logo
 /*.svg
+!logo.svg
 
 # Stray unused images at root (real assets live in BG/, 2 block/, Galery/)
 /*.png
