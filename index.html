@@ -2966,12 +2966,12 @@
       const map = L.map(mapEl, { scrollWheelZoom: false, attributionControl: true })
         .setView([44.0, 52.3], 7);
 
-      // Satellite imagery (free, no API key) + place labels
+      // Satellite imagery + place labels — both free from Esri, no API key
       L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
         maxZoom: 18, attribution: 'Imagery © Esri'
       }).addTo(map);
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
-        maxZoom: 19, attribution: '© OpenStreetMap, © CARTO', opacity: 0.9
+      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {
+        maxZoom: 18, attribution: 'Labels © Esri'
       }).addTo(map);
 
       const pin = (n, base) => L.divIcon({
