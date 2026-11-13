@@ -39,6 +39,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
+  <!-- Leaflet (interactive map) — self-hosted -->
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
   {
@@ -1276,6 +1279,80 @@
     .review-submit:disabled { opacity: .65; cursor: default; }
 
     /* ============================================================
+       MAP
+    ============================================================ */
+    #tourmap {
+      background: var(--navy);
+      padding: 104px 0 96px;
+      position: relative;
+    }
+    #tourmap .section-eyebrow { color: rgba(255,255,255,.60); }
+    #tourmap .section-title   { color: #fff; }
+    .map-head { text-align: center; margin-bottom: 44px; }
+    .map-head .section-desc { color: rgba(255,255,255,.72); max-width: 540px; margin: 14px auto 0; }
+    .map-frame {
+      position: relative;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: 0 30px 70px rgba(0,0,0,.34);
+    }
+    #map {
+      width: 100%;
+      height: 540px;
+      background: #0d1824;
+      z-index: 1;
+    }
+    .map-fallback {
+      display: none;
+      padding: 40px 24px;
+      text-align: center;
+      color: rgba(255,255,255,.8);
+      font-size: 15px;
+    }
+    .map-fallback a { color: var(--ochre); font-weight: 700; }
+    /* Custom map markers */
+    .map-pin {
+      display: flex; align-items: center; justify-content: center;
+      width: 34px; height: 34px;
+      background: var(--terra);
+      color: #fff;
+      border: 2px solid #fff;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      box-shadow: 0 4px 12px rgba(0,0,0,.4);
+      font-weight: 800; font-size: 14px;
+    }
+    .map-pin span { transform: rotate(45deg); }
+    .map-pin.base { background: var(--navy); border-radius: 50%; }
+    .map-pin.base span { transform: none; }
+    /* Leaflet popup — matched to the site */
+    .leaflet-popup-content-wrapper {
+      border-radius: 14px;
+      padding: 2px;
+      box-shadow: 0 16px 40px rgba(0,0,0,.3);
+    }
+    .leaflet-popup-content { margin: 16px 18px; width: 236px !important; }
+    .map-pop-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800; font-size: 17px; color: var(--text);
+      margin: 0 0 7px;
+    }
+    .map-pop-desc { font-size: 13px; line-height: 1.6; color: var(--text-muted); margin: 0 0 12px; }
+    .map-pop-meta { display: flex; flex-direction: column; gap: 5px; margin-bottom: 13px; }
+    .map-pop-meta div { font-size: 12.5px; color: var(--text); }
+    .map-pop-meta strong { color: var(--ochre); font-weight: 700; margin-right: 5px; }
+    .map-pop-price { color: var(--terra); font-weight: 800; }
+    .leaflet-popup-content a.map-pop-btn {
+      display: inline-block; width: 100%; box-sizing: border-box; text-align: center;
+      background: var(--terra); color: #fff !important; text-decoration: none;
+      padding: 11px; border-radius: 30px;
+      font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      transition: background .2s;
+    }
+    .leaflet-popup-content a.map-pop-btn:hover { background: #a84932; }
+
+    /* ============================================================
        RESPONSIVE — TABLET (≤1024px)
     ============================================================ */
     @media (max-width: 1024px) {
@@ -1420,6 +1497,11 @@
       #booking { padding: 80px 0; }
       .booking-form-card { padding: 28px 20px; }
       .form-row { grid-template-columns: 1fr; }
+
+      #tourmap { padding: 72px 0 68px; }
+      .map-head { margin-bottom: 32px; }
+      #map { height: 400px; }
+      .map-frame { border-radius: 16px; }
 
       #reviews { padding: 76px 0 64px; }
       .reviews-head { margin-bottom: 40px; }
@@ -1990,6 +2072,24 @@
 
     </div><!-- /routes-track -->
   </div>
+  <div class="tear" style="color:var(--navy)"><svg class="tear-svg"><use href="#tearShape"/></svg></div>
+</section>
+
+<!-- ============================================================
+     MAP
+============================================================ -->
+<section id="tourmap" aria-label="Карта маршрутов">
+  <div class="container">
+    <div class="map-head">
+      <span class="section-eyebrow reveal" data-i18n="map.eyebrow">На карте</span>
+      <h2 class="section-title reveal reveal-delay-1" data-i18n="map.title">Куда мы<br>отправимся</h2>
+      <p class="section-desc reveal reveal-delay-2" data-i18n="map.desc">Нажмите на метку, чтобы увидеть подробности о локации и построить маршрут.</p>
+    </div>
+    <div class="map-frame reveal">
+      <div id="map"></div>
+      <div class="map-fallback" id="mapFallback" data-i18n="map.fallback">Карта временно недоступна. Открыть локации в <a href="https://www.google.com/maps/search/?api=1&query=Bozzhyra+Mangystau" target="_blank" rel="noopener">Google Картах</a>.</div>
+    </div>
+  </div>
   <div class="tear" style="color:var(--terra)"><svg class="tear-svg"><use href="#tearShape"/></svg></div>
 </section>
 
@@ -2463,6 +2563,7 @@
 <!-- ============================================================
      SCRIPTS
 ============================================================ -->
+<script src="vendor/leaflet/leaflet.js" defer></script>
 <script>
   'use strict';
 
@@ -2499,6 +2600,7 @@
         'form.submit':'Book a tour','ph.name':'Your name','ph.comment':'Tell us your wishes...',
         'gallery.eyebrow':'Gallery','gallery.title':'Inspiring<br>shots','gallery.note':'Shots from our Mangystau expeditions — hover over a frame to bring it to life.',
         'reviews.eyebrow':'Reviews','reviews.title':'What travelers<br>say','reviews.formtitle':'Leave your review','reviews.formsub':'Share your impressions — your review will appear in the feed','reviews.rating':'Your rating','reviews.name':'Your name','reviews.trip':'Which route (optional)','reviews.text':'Your review','reviews.submit':'Submit review','reviews.ph.name':'e.g. Alex','reviews.ph.trip':'Bozzhyra, Tuzbair...','reviews.ph.text':'Tell us how your trip went...',
+        'map.eyebrow':'On the map','map.title':'Where we<br>will go','map.desc':'Tap a marker to see details about the location and get directions.','map.fallback':'Map temporarily unavailable. Open the locations in <a href="https://www.google.com/maps/search/?api=1&query=Bozzhyra+Mangystau" target="_blank" rel="noopener">Google Maps</a>.',
         'footer.brand':'Professional tours across Mangystau. Revealing the wild beauty of Kazakhstan since 2016. Based in Aktau.',
         'footer.col.routes':'Routes','footer.col.company':'Company','footer.col.contacts':'Contacts',
         'footer.grandtour':'Grand tour','footer.privacy':'Privacy','footer.city':'Aktau, Kazakhstan','footer.hours':'Mon–Sun: 9:00–21:00',
@@ -2529,6 +2631,7 @@
         'form.submit':'Tour buchen','ph.name':'Ihr Name','ph.comment':'Erzählen Sie uns Ihre Wünsche...',
         'gallery.eyebrow':'Galerie','gallery.title':'Inspirierende<br>Aufnahmen','gallery.note':'Aufnahmen unserer Mangystau-Expeditionen — fahren Sie über ein Bild, um es zu beleben.',
         'reviews.eyebrow':'Bewertungen','reviews.title':'Was Reisende<br>sagen','reviews.formtitle':'Hinterlassen Sie Ihre Bewertung','reviews.formsub':'Teilen Sie Ihre Eindrücke — Ihre Bewertung erscheint im Feed','reviews.rating':'Ihre Bewertung','reviews.name':'Ihr Name','reviews.trip':'Welche Route (optional)','reviews.text':'Ihre Bewertung','reviews.submit':'Bewertung senden','reviews.ph.name':'z. B. Alex','reviews.ph.trip':'Bozzhyra, Tuzbair...','reviews.ph.text':'Erzählen Sie, wie Ihre Reise war...',
+        'map.eyebrow':'Auf der Karte','map.title':'Wohin wir<br>reisen','map.desc':'Tippen Sie auf eine Markierung für Details zum Ort und die Route.','map.fallback':'Karte vorübergehend nicht verfügbar. Orte in <a href="https://www.google.com/maps/search/?api=1&query=Bozzhyra+Mangystau" target="_blank" rel="noopener">Google Maps</a> öffnen.',
         'footer.brand':'Professionelle Touren durch Mangystau. Wir zeigen die wilde Schönheit Kasachstans seit 2016. Ansässig in Aktau.',
         'footer.col.routes':'Routen','footer.col.company':'Unternehmen','footer.col.contacts':'Kontakt',
         'footer.grandtour':'Grand Tour','footer.privacy':'Datenschutz','footer.city':'Aktau, Kasachstan','footer.hours':'Mo–So: 9:00–21:00',
@@ -2559,6 +2662,7 @@
         'form.submit':'Réserver un tour','ph.name':'Votre nom','ph.comment':'Dites-nous vos envies...',
         'gallery.eyebrow':'Galerie','gallery.title':'Clichés<br>inspirants','gallery.note':'Clichés de nos expéditions au Mangystau — survolez une image pour l’animer.',
         'reviews.eyebrow':'Avis','reviews.title':'Ce que disent<br>les voyageurs','reviews.formtitle':'Laissez votre avis','reviews.formsub':'Partagez vos impressions — votre avis apparaîtra dans le fil','reviews.rating':'Votre note','reviews.name':'Votre nom','reviews.trip':'Quel itinéraire (facultatif)','reviews.text':'Votre avis','reviews.submit':'Envoyer l’avis','reviews.ph.name':'ex. Alex','reviews.ph.trip':'Bozzhyra, Tuzbair...','reviews.ph.text':'Racontez comment s’est passé votre voyage...',
+        'map.eyebrow':'Sur la carte','map.title':'Où nous<br>irons','map.desc':'Touchez un repère pour voir les détails du lieu et obtenir l’itinéraire.','map.fallback':'Carte temporairement indisponible. Ouvrir les lieux dans <a href="https://www.google.com/maps/search/?api=1&query=Bozzhyra+Mangystau" target="_blank" rel="noopener">Google Maps</a>.',
         'footer.brand':'Tours professionnels à travers le Mangystau. Nous révélons la beauté sauvage du Kazakhstan depuis 2016. Basés à Aktau.',
         'footer.col.routes':'Itinéraires','footer.col.company':'Entreprise','footer.col.contacts':'Contact',
         'footer.grandtour':'Grand tour','footer.privacy':'Confidentialité','footer.city':'Aktaou, Kazakhstan','footer.hours':'Lun–Dim : 9:00–21:00',
@@ -2826,6 +2930,85 @@
       setTimeout(() => { btn.textContent = orig; btn.disabled = false; }, 2600);
       card.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
+  })();
+
+  /* ── Tour map (Leaflet + satellite imagery, markers with full info) ── */
+  (function () {
+    const mapEl = document.getElementById('map');
+    if (!mapEl) return;
+
+    // The four tour locations + Aktau base (approx. coordinates, Mangystau region)
+    const PLACES = [
+      { n: 1, lat: 44.3200, lng: 51.6000, name: 'Долина шаров',
+        desc: 'Загадочные каменные сферы, разбросанные по степи — будто другая планета.',
+        dist: '170 км от Актау', dur: '1–2 дня', price: 'от 150 €' },
+      { n: 2, lat: 44.2560, lng: 52.0060, name: 'Гора Шеркала',
+        desc: 'Одинокая гора-юрта на древнем Шёлковом пути — легенда Мангистау.',
+        dist: '220 км от Актау', dur: '1–2 дня', price: 'от 150 €' },
+      { n: 3, lat: 44.0400, lng: 53.1580, name: 'Урочище Тузбаир',
+        desc: 'Белоснежные меловые обрывы над солончаком — сюрреалистичный пейзаж.',
+        dist: '250 км от Актау', dur: '2–3 дня', price: 'от 220 €' },
+      { n: 4, lat: 43.4773, lng: 53.8079, name: 'Урочище Бозжыра',
+        desc: 'Марсианские известняковые скалы и клыки на краю плато Устюрт.',
+        dist: '350 км от Актау', dur: '2–3 дня', price: 'от 220 €' }
+    ];
+    const AKTAU = { lat: 43.6481, lng: 51.1722, name: 'Актау', desc: 'Старт всех туров — встречаем вас здесь.' };
+
+    const esc = (s) => String(s).replace(/[&<>"']/g, m => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m]));
+
+    function init() {
+      if (!window.L) { // Leaflet failed to load → show a graceful fallback
+        const fb = document.getElementById('mapFallback');
+        if (fb) fb.style.display = 'block';
+        mapEl.style.display = 'none';
+        return;
+      }
+      const map = L.map(mapEl, { scrollWheelZoom: false, attributionControl: true })
+        .setView([44.0, 52.3], 7);
+
+      // Satellite imagery (free, no API key) + place labels
+      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        maxZoom: 18, attribution: 'Imagery © Esri'
+      }).addTo(map);
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
+        maxZoom: 19, attribution: '© OpenStreetMap, © CARTO', opacity: 0.9
+      }).addTo(map);
+
+      const pin = (n, base) => L.divIcon({
+        className: '', html: '<div class="map-pin' + (base ? ' base' : '') + '"><span>' + n + '</span></div>',
+        iconSize: [34, 34], iconAnchor: base ? [17, 17] : [17, 34], popupAnchor: [0, base ? -16 : -34]
+      });
+
+      const bounds = [];
+      PLACES.forEach(p => {
+        const gmaps = 'https://www.google.com/maps/dir/?api=1&destination=' + p.lat + ',' + p.lng;
+        const html =
+          '<div class="map-pop-name">' + esc(p.name) + '</div>' +
+          '<p class="map-pop-desc">' + esc(p.desc) + '</p>' +
+          '<div class="map-pop-meta">' +
+            '<div><strong>Расстояние</strong>' + esc(p.dist) + '</div>' +
+            '<div><strong>Длительность</strong>' + esc(p.dur) + '</div>' +
+            '<div><strong>Цена</strong><span class="map-pop-price">' + esc(p.price) + '</span></div>' +
+          '</div>' +
+          '<a class="map-pop-btn" href="' + gmaps + '" target="_blank" rel="noopener">Построить маршрут →</a>';
+        L.marker([p.lat, p.lng], { icon: pin(p.n, false), title: p.name })
+          .addTo(map).bindPopup(html, { maxWidth: 260 });
+        bounds.push([p.lat, p.lng]);
+      });
+
+      // Aktau base marker
+      L.marker([AKTAU.lat, AKTAU.lng], { icon: pin('★', true), title: AKTAU.name })
+        .addTo(map)
+        .bindPopup('<div class="map-pop-name">' + esc(AKTAU.name) + '</div><p class="map-pop-desc" style="margin:0">' + esc(AKTAU.desc) + '</p>');
+      bounds.push([AKTAU.lat, AKTAU.lng]);
+
+      map.fitBounds(bounds, { padding: [48, 48] });
+      // Re-measure once the section becomes visible (it starts hidden/animated)
+      setTimeout(() => map.invalidateSize(), 400);
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
   })();
 
   /* ── Mobile hero parallax: title sinks behind the rocks on scroll ──
