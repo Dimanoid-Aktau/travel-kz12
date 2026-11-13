@@ -178,9 +178,10 @@
     }
     .nav-links {
       display: flex;
-      gap: 32px;
+      gap: 28px;
       list-style: none;
     }
+    .nav-links a { white-space: nowrap; }
     .nav-links a {
       font-size: 12px;
       font-weight: 600;
@@ -1161,6 +1162,120 @@
     #btt:hover { background: var(--ochre); }
 
     /* ============================================================
+       REVIEWS
+    ============================================================ */
+    #reviews {
+      background: var(--navy);
+      padding: 110px 0 90px;
+      position: relative;
+    }
+    #reviews .section-eyebrow { color: rgba(255,255,255,.60); }
+    #reviews .section-title   { color: #fff; }
+    .reviews-head { text-align: center; margin-bottom: 54px; }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 68px;
+    }
+    .review-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      padding: 28px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+    }
+    .review-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255,255,255,0.24);
+      box-shadow: 0 18px 44px rgba(0,0,0,.30);
+    }
+    .review-stars { display: flex; gap: 3px; }
+    .review-stars svg { width: 18px; height: 18px; display: block; }
+    .review-text {
+      color: rgba(255,255,255,0.88);
+      font-size: 15px;
+      line-height: 1.75;
+      flex: 1;
+    }
+    .review-author { display: flex; align-items: center; gap: 12px; margin-top: 2px; }
+    .review-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--terra);
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 17px; flex-shrink: 0;
+    }
+    .review-meta { display: flex; flex-direction: column; line-height: 1.35; min-width: 0; }
+    .review-name { color: #fff; font-weight: 700; font-size: 15px; }
+    .review-trip { color: rgba(255,255,255,0.52); font-size: 12.5px; }
+
+    /* Review form */
+    .review-form-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 22px;
+      padding: 38px 36px;
+    }
+    .review-form-title {
+      text-align: center; color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800; font-size: 23px; margin-bottom: 8px;
+    }
+    .review-form-sub {
+      text-align: center; color: rgba(255,255,255,0.6);
+      font-size: 14px; margin-bottom: 28px;
+    }
+    .review-form .form-field { margin-bottom: 18px; }
+    .review-form label {
+      display: block; color: rgba(255,255,255,0.72);
+      font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+      margin-bottom: 9px;
+    }
+    .review-form input,
+    .review-form textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 12px;
+      padding: 13px 16px;
+      color: #fff; font-size: 15px; font-family: inherit;
+      transition: border-color .2s, background .2s;
+    }
+    .review-form input::placeholder,
+    .review-form textarea::placeholder { color: rgba(255,255,255,0.4); }
+    .review-form input:focus,
+    .review-form textarea:focus {
+      outline: none; border-color: var(--ochre); background: rgba(255,255,255,0.12);
+    }
+    .review-form textarea { resize: vertical; min-height: 112px; }
+    .rating-input { display: flex; gap: 6px; }
+    .rating-input button {
+      background: none; border: none; cursor: pointer; padding: 2px;
+      color: rgba(255,255,255,0.26);
+      transition: color .15s, transform .15s;
+    }
+    .rating-input button svg { width: 30px; height: 30px; display: block; }
+    .rating-input button:hover { transform: scale(1.12); }
+    .rating-input button.on { color: var(--ochre); }
+    .review-submit {
+      width: 100%; margin-top: 8px;
+      background: var(--terra); color: #fff;
+      border: none; border-radius: 40px; padding: 16px;
+      font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      cursor: pointer; transition: background .2s, transform .15s;
+    }
+    .review-submit:hover { background: #a84932; }
+    .review-submit:active { transform: scale(.98); }
+    .review-submit:disabled { opacity: .65; cursor: default; }
+
+    /* ============================================================
        RESPONSIVE — TABLET (≤1024px)
     ============================================================ */
     @media (max-width: 1024px) {
@@ -1305,6 +1420,13 @@
       #booking { padding: 80px 0; }
       .booking-form-card { padding: 28px 20px; }
       .form-row { grid-template-columns: 1fr; }
+
+      #reviews { padding: 76px 0 64px; }
+      .reviews-head { margin-bottom: 40px; }
+      .reviews-grid { grid-template-columns: 1fr; gap: 16px; margin-bottom: 48px; }
+      .review-card { padding: 24px 22px; }
+      .review-form-wrap { padding: 28px 20px; border-radius: 18px; }
+      .review-form-title { font-size: 20px; }
 
       #gallery { padding: 80px 0; }
       .gallery-head { flex-direction: column; align-items: flex-start; }
@@ -1520,6 +1642,7 @@
     <li><a href="#routes" data-i18n="nav.routes">Маршруты</a></li>
     <li><a href="#why" data-i18n="nav.about">О нас</a></li>
     <li><a href="#gallery" data-i18n="nav.gallery">Галерея</a></li>
+    <li><a href="#reviews" data-i18n="nav.reviews">Отзывы</a></li>
     <li><a href="#contacts" data-i18n="nav.contacts">Контакты</a></li>
   </ul>
   <div class="nav-right">
@@ -1567,6 +1690,7 @@
   <a href="#routes"  class="mob-link" data-i18n="nav.routes">Маршруты</a>
   <a href="#why"     class="mob-link" data-i18n="nav.about">О нас</a>
   <a href="#gallery" class="mob-link" data-i18n="nav.gallery">Галерея</a>
+  <a href="#reviews" class="mob-link" data-i18n="nav.reviews">Отзывы</a>
   <a href="#booking" class="mob-link" data-i18n="nav.booking">Бронирование</a>
   <a href="#contacts" class="mob-link" data-i18n="nav.contacts">Контакты</a>
   <div class="lang-switch lang-switch-mob">
@@ -2113,6 +2237,144 @@
       </div>
     </div>
   </div>
+  <div class="tear" style="color:var(--navy)"><svg class="tear-svg"><use href="#tearShape"/></svg></div>
+</section>
+
+<!-- ============================================================
+     REVIEWS
+============================================================ -->
+<section id="reviews" aria-label="Отзывы клиентов">
+  <div class="container">
+    <div class="reviews-head">
+      <span class="section-eyebrow reveal" data-i18n="reviews.eyebrow">Отзывы</span>
+      <h2 class="section-title reveal reveal-delay-1" data-i18n="reviews.title">Что говорят<br>путешественники</h2>
+    </div>
+
+    <div class="reviews-grid" id="reviewsGrid">
+
+      <div class="review-card reveal">
+        <div class="review-stars" aria-label="5 из 5">
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="review-text">Бозжыра на рассвете перевернула моё представление о Казахстане. Гид знал все лучшие точки для фото, а джип ни разу не подвёл на бездорожье. Вернусь обязательно!</p>
+        <div class="review-author">
+          <div class="review-avatar">А</div>
+          <div class="review-meta"><span class="review-name">Айгерим Нурланова</span><span class="review-trip">Урочище Бозжыра · июнь 2026</span></div>
+        </div>
+      </div>
+
+      <div class="review-card reveal reveal-delay-1">
+        <div class="review-stars" aria-label="5 из 5">
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="review-text">Ездили семьёй на Долину шаров и Шеркалу. Детям всё понравилось, организация на высоте, а ночёвка под звёздным небом — просто незабываемо. Спасибо команде!</p>
+        <div class="review-author">
+          <div class="review-avatar">Д</div>
+          <div class="review-meta"><span class="review-name">Дмитрий Соколов</span><span class="review-trip">Долина шаров · май 2026</span></div>
+        </div>
+      </div>
+
+      <div class="review-card reveal reveal-delay-2">
+        <div class="review-stars" aria-label="5 из 5">
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="review-text">Профессионалы своего дела. Чистый транспорт, вкусная домашняя еда и безопасность на первом месте. Тузбаир на закате — это чистый космос. Рекомендую всем!</p>
+        <div class="review-author">
+          <div class="review-avatar">М</div>
+          <div class="review-meta"><span class="review-name">Марина Велько</span><span class="review-trip">Урочище Тузбаир · апрель 2026</span></div>
+        </div>
+      </div>
+
+      <div class="review-card reveal">
+        <div class="review-stars" aria-label="5 из 5">
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="review-text">Брал индивидуальный тур на 3 дня, маршрут полностью подстроили под меня. Фотографии получились потрясающие, гид — настоящий знаток региона. Спасибо TRAVEL KZ12!</p>
+        <div class="review-author">
+          <div class="review-avatar">А</div>
+          <div class="review-meta"><span class="review-name">Алексей Жанибеков</span><span class="review-trip">Гранд-тур · март 2026</span></div>
+        </div>
+      </div>
+
+      <div class="review-card reveal reveal-delay-1">
+        <div class="review-stars" aria-label="5 of 5">
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="review-text">Amazing trip through Mangystau! Our guide was knowledgeable and friendly, the 4×4 was comfortable and the landscapes are truly out of this world. Highly recommended.</p>
+        <div class="review-author">
+          <div class="review-avatar">E</div>
+          <div class="review-meta"><span class="review-name">Elena Fischer</span><span class="review-trip">Bozzhyra · September 2026</span></div>
+        </div>
+      </div>
+
+      <div class="review-card reveal reveal-delay-2">
+        <div class="review-stars" aria-label="5 из 5">
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D98236" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="review-text">Лучшее приключение за последние годы. Всё чётко по времени, цены честные, никаких скрытых доплат. Организаторы — большие молодцы, всё продумано до мелочей.</p>
+        <div class="review-author">
+          <div class="review-avatar">Т</div>
+          <div class="review-meta"><span class="review-name">Тимур Абдуллин</span><span class="review-trip">Долина шаров · февраль 2026</span></div>
+        </div>
+      </div>
+
+    </div><!-- /reviews-grid -->
+
+    <div class="review-form-wrap reveal">
+      <h3 class="review-form-title" data-i18n="reviews.formtitle">Оставьте свой отзыв</h3>
+      <p class="review-form-sub" data-i18n="reviews.formsub">Поделитесь впечатлениями о путешествии — ваш отзыв появится в ленте</p>
+      <form class="review-form" id="reviewForm" novalidate>
+        <div class="form-field">
+          <label data-i18n="reviews.rating">Ваша оценка</label>
+          <div class="rating-input" id="ratingInput" role="radiogroup" aria-label="Оценка">
+            <button type="button" aria-label="1"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></button>
+          <button type="button" aria-label="2"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></button>
+          <button type="button" aria-label="3"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></button>
+          <button type="button" aria-label="4"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></button>
+          <button type="button" aria-label="5"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></button>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="rv-name" data-i18n="reviews.name">Ваше имя</label>
+          <input type="text" id="rv-name" name="name" placeholder="Например, Асель" data-i18n-ph="reviews.ph.name" required>
+        </div>
+        <div class="form-field">
+          <label for="rv-trip" data-i18n="reviews.trip">Какой маршрут (необязательно)</label>
+          <input type="text" id="rv-trip" name="trip" placeholder="Бозжыра, Тузбаир..." data-i18n-ph="reviews.ph.trip">
+        </div>
+        <div class="form-field">
+          <label for="rv-text" data-i18n="reviews.text">Ваш отзыв</label>
+          <textarea id="rv-text" name="text" placeholder="Расскажите, как прошло путешествие..." data-i18n-ph="reviews.ph.text" required></textarea>
+        </div>
+        <button type="submit" class="review-submit" id="reviewSubmit" data-i18n="reviews.submit">Отправить отзыв</button>
+      </form>
+    </div>
+
+  </div>
   <div class="tear" style="color:var(--navy-dark)"><svg class="tear-svg"><use href="#tearShape"/></svg></div>
 </section>
 
@@ -2151,6 +2413,7 @@
         <ul>
           <li><a href="#why" data-i18n="nav.about">О нас</a></li>
           <li><a href="#gallery" data-i18n="nav.gallery">Галерея</a></li>
+          <li><a href="#reviews" data-i18n="nav.reviews">Отзывы</a></li>
           <li><a href="#booking" data-i18n="nav.booking">Бронирование</a></li>
           <li><a href="#privacy" data-i18n="footer.privacy">Конфиденциальность</a></li>
         </ul>
@@ -2213,7 +2476,7 @@
   (function () {
     const T = {
       en: {
-        'nav.routes':'Routes','nav.about':'About us','nav.gallery':'Gallery','nav.booking':'Booking','nav.contacts':'Contacts','nav.book':'Book now',
+        'nav.routes':'Routes','nav.about':'About us','nav.gallery':'Gallery','nav.reviews':'Reviews','nav.booking':'Booking','nav.contacts':'Contacts','nav.book':'Book now',
         'hero.eyebrow':'TOURS OF','hero.mang':'MANGYSTAU','hero.book':'Book now','hero.scroll':'Scroll',
         'stats.guests':'Happy guests','stats.routes':'Routes','stats.years':'Years of experience',
         'routes.eyebrow':'Our routes','routes.title':'Legends of<br>Mangystau','routes.desc':'Four unique locations — each a universe of its own.<br>Choose your path.',
@@ -2235,6 +2498,7 @@
         'form.privacy':'By submitting, you agree to the <a href="#privacy">privacy policy</a>. We guarantee the security of your data.',
         'form.submit':'Book a tour','ph.name':'Your name','ph.comment':'Tell us your wishes...',
         'gallery.eyebrow':'Gallery','gallery.title':'Inspiring<br>shots','gallery.note':'Shots from our Mangystau expeditions — hover over a frame to bring it to life.',
+        'reviews.eyebrow':'Reviews','reviews.title':'What travelers<br>say','reviews.formtitle':'Leave your review','reviews.formsub':'Share your impressions — your review will appear in the feed','reviews.rating':'Your rating','reviews.name':'Your name','reviews.trip':'Which route (optional)','reviews.text':'Your review','reviews.submit':'Submit review','reviews.ph.name':'e.g. Alex','reviews.ph.trip':'Bozzhyra, Tuzbair...','reviews.ph.text':'Tell us how your trip went...',
         'footer.brand':'Professional tours across Mangystau. Revealing the wild beauty of Kazakhstan since 2016. Based in Aktau.',
         'footer.col.routes':'Routes','footer.col.company':'Company','footer.col.contacts':'Contacts',
         'footer.grandtour':'Grand tour','footer.privacy':'Privacy','footer.city':'Aktau, Kazakhstan','footer.hours':'Mon–Sun: 9:00–21:00',
@@ -2242,7 +2506,7 @@
         'footer.rights':'© 2026&nbsp;TRAVEL_KZ12. All rights reserved.','footer.tagline':'Mangystau tours · Aktau · Kazakhstan'
       },
       de: {
-        'nav.routes':'Routen','nav.about':'Über uns','nav.gallery':'Galerie','nav.booking':'Buchung','nav.contacts':'Kontakt','nav.book':'Jetzt buchen',
+        'nav.routes':'Routen','nav.about':'Über uns','nav.gallery':'Galerie','nav.reviews':'Bewertungen','nav.booking':'Buchung','nav.contacts':'Kontakt','nav.book':'Jetzt buchen',
         'hero.eyebrow':'TOUREN DURCH','hero.mang':'MANGYSTAU','hero.book':'Jetzt buchen','hero.scroll':'Scrollen',
         'stats.guests':'Zufriedene Gäste','stats.routes':'Routen','stats.years':'Jahre Erfahrung',
         'routes.eyebrow':'Unsere Routen','routes.title':'Legenden von<br>Mangystau','routes.desc':'Vier einzigartige Orte — jeder ein eigenes Universum.<br>Wähle deinen Weg.',
@@ -2264,6 +2528,7 @@
         'form.privacy':'Mit dem Absenden stimmen Sie der <a href="#privacy">Datenschutzrichtlinie</a> zu. Wir garantieren die Sicherheit Ihrer Daten.',
         'form.submit':'Tour buchen','ph.name':'Ihr Name','ph.comment':'Erzählen Sie uns Ihre Wünsche...',
         'gallery.eyebrow':'Galerie','gallery.title':'Inspirierende<br>Aufnahmen','gallery.note':'Aufnahmen unserer Mangystau-Expeditionen — fahren Sie über ein Bild, um es zu beleben.',
+        'reviews.eyebrow':'Bewertungen','reviews.title':'Was Reisende<br>sagen','reviews.formtitle':'Hinterlassen Sie Ihre Bewertung','reviews.formsub':'Teilen Sie Ihre Eindrücke — Ihre Bewertung erscheint im Feed','reviews.rating':'Ihre Bewertung','reviews.name':'Ihr Name','reviews.trip':'Welche Route (optional)','reviews.text':'Ihre Bewertung','reviews.submit':'Bewertung senden','reviews.ph.name':'z. B. Alex','reviews.ph.trip':'Bozzhyra, Tuzbair...','reviews.ph.text':'Erzählen Sie, wie Ihre Reise war...',
         'footer.brand':'Professionelle Touren durch Mangystau. Wir zeigen die wilde Schönheit Kasachstans seit 2016. Ansässig in Aktau.',
         'footer.col.routes':'Routen','footer.col.company':'Unternehmen','footer.col.contacts':'Kontakt',
         'footer.grandtour':'Grand Tour','footer.privacy':'Datenschutz','footer.city':'Aktau, Kasachstan','footer.hours':'Mo–So: 9:00–21:00',
@@ -2271,7 +2536,7 @@
         'footer.rights':'© 2026&nbsp;TRAVEL_KZ12. Alle Rechte vorbehalten.','footer.tagline':'Mangystau-Touren · Aktau · Kasachstan'
       },
       fr: {
-        'nav.routes':'Itinéraires','nav.about':'À propos','nav.gallery':'Galerie','nav.booking':'Réservation','nav.contacts':'Contact','nav.book':'Réserver',
+        'nav.routes':'Itinéraires','nav.about':'À propos','nav.gallery':'Galerie','nav.reviews':'Avis','nav.booking':'Réservation','nav.contacts':'Contact','nav.book':'Réserver',
         'hero.eyebrow':'TOURS DU','hero.mang':'MANGYSTAU','hero.book':'Réserver','hero.scroll':'Défiler',
         'stats.guests':'Clients satisfaits','stats.routes':'Itinéraires','stats.years':'Ans d’expérience',
         'routes.eyebrow':'Nos itinéraires','routes.title':'Légendes du<br>Mangystau','routes.desc':'Quatre lieux uniques — chacun un univers à part.<br>Choisis ta voie.',
@@ -2293,6 +2558,7 @@
         'form.privacy':'En soumettant, vous acceptez la <a href="#privacy">politique de confidentialité</a>. Nous garantissons la sécurité de vos données.',
         'form.submit':'Réserver un tour','ph.name':'Votre nom','ph.comment':'Dites-nous vos envies...',
         'gallery.eyebrow':'Galerie','gallery.title':'Clichés<br>inspirants','gallery.note':'Clichés de nos expéditions au Mangystau — survolez une image pour l’animer.',
+        'reviews.eyebrow':'Avis','reviews.title':'Ce que disent<br>les voyageurs','reviews.formtitle':'Laissez votre avis','reviews.formsub':'Partagez vos impressions — votre avis apparaîtra dans le fil','reviews.rating':'Votre note','reviews.name':'Votre nom','reviews.trip':'Quel itinéraire (facultatif)','reviews.text':'Votre avis','reviews.submit':'Envoyer l’avis','reviews.ph.name':'ex. Alex','reviews.ph.trip':'Bozzhyra, Tuzbair...','reviews.ph.text':'Racontez comment s’est passé votre voyage...',
         'footer.brand':'Tours professionnels à travers le Mangystau. Nous révélons la beauté sauvage du Kazakhstan depuis 2016. Basés à Aktau.',
         'footer.col.routes':'Itinéraires','footer.col.company':'Entreprise','footer.col.contacts':'Contact',
         'footer.grandtour':'Grand tour','footer.privacy':'Confidentialité','footer.city':'Aktaou, Kazakhstan','footer.hours':'Lun–Dim : 9:00–21:00',
@@ -2494,6 +2760,72 @@
         show(dx < 0 ? idx + 1 : idx - 1);
       }
     }, { passive: true });
+  })();
+
+  /* ── Reviews: interactive rating + submit (saved in this browser) ── */
+  (function () {
+    const form = document.getElementById('reviewForm');
+    const grid = document.getElementById('reviewsGrid');
+    if (!form || !grid) return;
+    const STORE = 'tkz12_reviews';
+    const STAR = 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z';
+    const starBtns = [...form.querySelectorAll('.rating-input button')];
+    const nameI = document.getElementById('rv-name');
+    const tripI = document.getElementById('rv-trip');
+    const textI = document.getElementById('rv-text');
+    const btn   = document.getElementById('reviewSubmit');
+    let rating = 5;
+
+    const paint = (n) => starBtns.forEach((b, i) => b.classList.toggle('on', i < n));
+    starBtns.forEach((b, i) => b.addEventListener('click', () => { rating = i + 1; paint(rating); }));
+    paint(rating);
+
+    const svg = (color) => {
+      const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      s.setAttribute('viewBox', '0 0 24 24'); s.setAttribute('fill', color);
+      const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      p.setAttribute('d', STAR); s.appendChild(p); return s;
+    };
+    const makeCard = (r) => {
+      const card = document.createElement('div');
+      card.className = 'review-card';
+      const stars = document.createElement('div');
+      stars.className = 'review-stars';
+      for (let i = 0; i < 5; i++) stars.appendChild(svg(i < r.rating ? '#D98236' : 'rgba(255,255,255,.22)'));
+      const text = document.createElement('p');
+      text.className = 'review-text'; text.textContent = r.text;
+      const author = document.createElement('div');
+      author.className = 'review-author';
+      const av = document.createElement('div');
+      av.className = 'review-avatar'; av.textContent = (r.name.trim()[0] || '?').toUpperCase();
+      const meta = document.createElement('div');
+      meta.className = 'review-meta';
+      const nm = document.createElement('span'); nm.className = 'review-name'; nm.textContent = r.name;
+      meta.appendChild(nm);
+      if (r.trip) { const tp = document.createElement('span'); tp.className = 'review-trip'; tp.textContent = r.trip; meta.appendChild(tp); }
+      author.append(av, meta);
+      card.append(stars, text, author);
+      return card;
+    };
+
+    // Restore reviews this visitor left earlier (newest first)
+    let saved = [];
+    try { saved = JSON.parse(localStorage.getItem(STORE) || '[]'); } catch (e) {}
+    saved.forEach(r => grid.prepend(makeCard(r)));
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const r = { name: nameI.value.trim(), trip: tripI.value.trim(), text: textI.value.trim(), rating };
+      if (!r.name || !r.text) { (r.name ? textI : nameI).focus(); return; }
+      const card = makeCard(r);
+      grid.prepend(card);
+      try { saved.push(r); localStorage.setItem(STORE, JSON.stringify(saved)); } catch (e) {}
+      form.reset(); rating = 5; paint(5);
+      const orig = btn.textContent;
+      btn.textContent = 'Спасибо за отзыв! ✓'; btn.disabled = true;
+      setTimeout(() => { btn.textContent = orig; btn.disabled = false; }, 2600);
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
   })();
 
   /* ── Mobile hero parallax: title sinks behind the rocks on scroll ──
