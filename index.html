@@ -656,6 +656,14 @@
       color: var(--ochre);
       margin-bottom: 3px;
     }
+    /* Price — stands out from the other meta rows */
+    .route-row-meta-item.price { margin-top: 2px; }
+    .route-row-meta-item .route-price {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--terra);
+      line-height: 1.1;
+    }
     .route-row-btn {
       display: inline-flex;
       align-items: center;
@@ -1750,6 +1758,9 @@
             <div class="route-row-meta-item">
               <strong data-i18n="route.duration">Продолжительность</strong><span data-i18n="val.dur12">1–2 дня</span>
             </div>
+            <div class="route-row-meta-item price">
+              <strong data-i18n="route.price">Цена</strong><span class="route-price" data-i18n="val.from150">от 150 €</span>
+            </div>
           </div>
           <a href="#booking" class="route-row-btn fbtn">
             <svg class="farr-l" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -1777,6 +1788,9 @@
             </div>
             <div class="route-row-meta-item">
               <strong data-i18n="route.duration">Продолжительность</strong><span data-i18n="val.dur12">1–2 дня</span>
+            </div>
+            <div class="route-row-meta-item price">
+              <strong data-i18n="route.price">Цена</strong><span class="route-price" data-i18n="val.from150">от 150 €</span>
             </div>
           </div>
           <a href="#booking" class="route-row-btn fbtn">
@@ -1806,6 +1820,9 @@
             <div class="route-row-meta-item">
               <strong data-i18n="route.duration">Продолжительность</strong><span data-i18n="val.dur23">2–3 дня</span>
             </div>
+            <div class="route-row-meta-item price">
+              <strong data-i18n="route.price">Цена</strong><span class="route-price" data-i18n="val.from220">от 220 €</span>
+            </div>
           </div>
           <a href="#booking" class="route-row-btn fbtn">
             <svg class="farr-l" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -1833,6 +1850,9 @@
             </div>
             <div class="route-row-meta-item">
               <strong data-i18n="route.duration">Продолжительность</strong><span data-i18n="val.dur23">2–3 дня</span>
+            </div>
+            <div class="route-row-meta-item price">
+              <strong data-i18n="route.price">Цена</strong><span class="route-price" data-i18n="val.from220">от 220 €</span>
             </div>
           </div>
           <a href="#booking" class="route-row-btn fbtn">
@@ -2200,6 +2220,7 @@
         'route.dolina':'Valley of Balls','route.sherkala':'Mount Sherkala','route.tuzbair':'Tuzbair Tract','route.bozgyra':'Bozzhyra Tract',
         'route.distance':'Distance','route.type':'Route type','route.duration':'Duration','route.book':'Book',
         'val.jeep':'Off-road 4×4','val.d170':'170 km from Aktau','val.d220':'220 km from Aktau','val.d250':'250 km from Aktau','val.d350':'350 km from Aktau','val.dur12':'1–2 days','val.dur23':'2–3 days',
+        'route.price':'Price','val.from150':'from €150','val.from220':'from €220',
         'why.lead':'A land where earth meets eternity!','why.intro':'We open up Mangystau from the sides ordinary routes never reach. Remote canyons, ancient necropolises, the wild Caspian coast and Martian landscapes — all within a single journey.',
         'why.eyebrow':'Our advantages','why.title':'Why choose us',
         'why.1.t':'Experienced guides','why.1.d':'Local guides who know every stone of Mangystau. Your safety is our top priority on the route.',
@@ -2228,6 +2249,7 @@
         'route.dolina':'Tal der Kugeln','route.sherkala':'Berg Scherkala','route.tuzbair':'Tuzbair-Gebiet','route.bozgyra':'Bozzhyra-Gebiet',
         'route.distance':'Entfernung','route.type':'Routentyp','route.duration':'Dauer','route.book':'Buchen',
         'val.jeep':'Offroad 4×4','val.d170':'170 km von Aktau','val.d220':'220 km von Aktau','val.d250':'250 km von Aktau','val.d350':'350 km von Aktau','val.dur12':'1–2 Tage','val.dur23':'2–3 Tage',
+        'route.price':'Preis','val.from150':'ab 150 €','val.from220':'ab 220 €',
         'why.lead':'Ein Land, wo die Erde auf die Ewigkeit trifft!','why.intro':'Wir erschließen Mangystau von Seiten, die gewöhnliche Routen nie erreichen. Abgelegene Canyons, antike Nekropolen, die wilde Kaspi-Küste und marsianische Landschaften — alles auf einer einzigen Reise.',
         'why.eyebrow':'Unsere Vorteile','why.title':'Warum uns wählen',
         'why.1.t':'Erfahrene Guides','why.1.d':'Lokale Guides, die jeden Stein von Mangystau kennen. Ihre Sicherheit ist unsere oberste Priorität.',
@@ -2256,6 +2278,7 @@
         'route.dolina':'Vallée des Boules','route.sherkala':'Mont Sherkala','route.tuzbair':'Site de Tuzbair','route.bozgyra':'Site de Bozzhyra',
         'route.distance':'Distance','route.type':'Type d’itinéraire','route.duration':'Durée','route.book':'Réserver',
         'val.jeep':'4×4 tout-terrain','val.d170':'170 km d’Aktau','val.d220':'220 km d’Aktau','val.d250':'250 km d’Aktau','val.d350':'350 km d’Aktau','val.dur12':'1–2 jours','val.dur23':'2–3 jours',
+        'route.price':'Prix','val.from150':'à partir de 150 €','val.from220':'à partir de 220 €',
         'why.lead':'Une terre où le sol rencontre l\'éternité !','why.intro':'Nous révélons le Mangystau sous des angles que les itinéraires ordinaires n\'atteignent jamais. Canyons reculés, nécropoles anciennes, côte sauvage de la Caspienne et paysages martiens — le tout en un seul voyage.',
         'why.eyebrow':'Nos avantages','why.title':'Pourquoi nous choisir',
         'why.1.t':'Guides expérimentés','why.1.d':'Des guides locaux qui connaissent chaque pierre du Mangystau. Votre sécurité est notre priorité.',
