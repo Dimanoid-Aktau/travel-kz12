@@ -1075,12 +1075,20 @@
     ============================================================ */
     footer {
       position: relative;
+      margin-top: -80px;
       background:
-        linear-gradient(180deg, rgba(13,24,36,.90) 0%, rgba(13,24,36,.78) 32%, rgba(13,24,36,.86) 72%, rgba(13,24,36,.94) 100%),
+        linear-gradient(180deg, rgba(13,24,36,.90) 0%, rgba(13,24,36,.78) 38%, rgba(13,24,36,.86) 74%, rgba(13,24,36,.94) 100%),
         url('BG/footer-bg.jpg') center/cover no-repeat;
       background-color: var(--navy-dark);
       color: rgba(255,255,255,.6);
-      padding: 80px 0 36px;
+      padding: 120px 0 36px;
+      /* Wavy top edge cut from the footer itself, so the photo continues
+         seamlessly through the organic transition (same shape as .tear) */
+      --tear-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 90' preserveAspectRatio='none'%3E%3Cpath fill='%23fff' d='M0,90 L0,44 C40,36 70,29 110,33 C150,37 180,51 232,50 C284,49 312,33 362,31 C412,29 452,46 502,47 C556,48 590,31 642,29 C694,27 732,44 792,46 C852,48 882,33 932,32 C986,31 1020,46 1076,46 C1132,46 1166,35 1200,40 L1200,90 Z'/%3E%3C/svg%3E");
+      -webkit-mask: var(--tear-mask) top center/100% 84px no-repeat,
+                    linear-gradient(#fff,#fff) bottom/100% calc(100% - 82px) no-repeat;
+              mask: var(--tear-mask) top center/100% 84px no-repeat,
+                    linear-gradient(#fff,#fff) bottom/100% calc(100% - 82px) no-repeat;
     }
     .footer-grid {
       display: grid;
@@ -2482,7 +2490,6 @@
     </div>
 
   </div>
-  <div class="tear" style="color:var(--navy-dark)"><svg class="tear-svg"><use href="#tearShape"/></svg></div>
 </section>
 
 <!-- ============================================================
