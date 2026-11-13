@@ -1546,7 +1546,13 @@
       }
       .gallery-cell img { height: 300px; }
 
-      footer { padding: 60px 0 28px; }
+      footer {
+        padding: 100px 0 28px;
+        background:
+          linear-gradient(180deg, rgba(13,24,36,.72) 0%, rgba(13,24,36,.60) 30%, rgba(13,24,36,.78) 68%, rgba(13,24,36,.92) 100%),
+          url('BG/footer-bg-mobile.jpg') center top/cover no-repeat;
+        background-color: var(--navy-dark);
+      }
       .footer-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
       .footer-brand { display: flex; flex-direction: column; align-items: center; }
       .footer-brand .nav-logo { justify-content: center; margin-bottom: 20px; }
