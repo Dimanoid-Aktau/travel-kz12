@@ -1074,8 +1074,12 @@
        FOOTER
     ============================================================ */
     footer {
-      background: var(--navy-dark);
-      color: rgba(255,255,255,.55);
+      position: relative;
+      background:
+        linear-gradient(180deg, rgba(13,24,36,.90) 0%, rgba(13,24,36,.78) 32%, rgba(13,24,36,.86) 72%, rgba(13,24,36,.94) 100%),
+        url('BG/footer-bg.jpg') center/cover no-repeat;
+      background-color: var(--navy-dark);
+      color: rgba(255,255,255,.6);
       padding: 80px 0 36px;
     }
     .footer-grid {
