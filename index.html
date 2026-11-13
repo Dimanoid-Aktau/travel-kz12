@@ -171,7 +171,8 @@
       box-shadow: 0 2px 24px rgba(0,0,0,.35);
     }
     .nav-logo {
-      flex-shrink: 0;
+      flex: 1 1 0;
+      min-width: 0;
       display: flex;
       align-items: center;
     }
@@ -209,8 +210,11 @@
     }
     .nav-book-btn .fblob { background: var(--terra); }
     .nav-right {
+      flex: 1 1 0;
+      min-width: 0;
       display: flex;
       align-items: center;
+      justify-content: flex-end;
       gap: 18px;
     }
     .nav-social {
@@ -1763,12 +1767,6 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>
       </a>
     </div>
-    <button class="nav-book-btn fbtn" onclick="jumpTo('#booking')">
-      <svg class="farr-l" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      <span class="ftxt" data-i18n="nav.book">Забронировать</span>
-      <span class="fblob"></span>
-      <svg class="farr-r" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-    </button>
   </div>
   <button class="nav-burger" id="burger" aria-label="Открыть меню" aria-expanded="false">
     <span></span><span></span><span></span>
