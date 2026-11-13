@@ -1895,6 +1895,21 @@
         <span class="wx-day-icon"></span>
         <div class="wx-day-temps"><span class="wx-day-max">—</span><span class="wx-day-min">—</span></div>
       </div>
+      <div class="wx-day" data-day="4">
+        <span class="wx-day-name">—</span>
+        <span class="wx-day-icon"></span>
+        <div class="wx-day-temps"><span class="wx-day-max">—</span><span class="wx-day-min">—</span></div>
+      </div>
+      <div class="wx-day" data-day="5">
+        <span class="wx-day-name">—</span>
+        <span class="wx-day-icon"></span>
+        <div class="wx-day-temps"><span class="wx-day-max">—</span><span class="wx-day-min">—</span></div>
+      </div>
+      <div class="wx-day" data-day="6">
+        <span class="wx-day-name">—</span>
+        <span class="wx-day-icon"></span>
+        <div class="wx-day-temps"><span class="wx-day-max">—</span><span class="wx-day-min">—</span></div>
+      </div>
     </div>
   </div>
   <div class="tear" style="color:var(--navy)"><svg class="tear-svg"><use href="#tearShape"/></svg></div>
@@ -3173,7 +3188,7 @@
       '?latitude=43.6366&longitude=51.1980' +
       '&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,weather_code' +
       '&daily=temperature_2m_max,temperature_2m_min,weather_code' +
-      '&timezone=Asia%2FOral&forecast_days=4&wind_speed_unit=kmh';
+      '&timezone=Asia%2FOral&forecast_days=7&wind_speed_unit=kmh';
 
     fetch(url)
       .then(function(r){ return r.json(); })
@@ -3185,7 +3200,7 @@
         document.getElementById('wx-feels').textContent = 'Ощущ. ' + Math.round(c.apparent_temperature) + '°C';
         document.getElementById('wx-wind').textContent  = Math.round(c.wind_speed_10m) + ' км/ч';
         document.getElementById('wx-humid').textContent = Math.round(c.relative_humidity_2m) + '%';
-        for (var i = 1; i <= 3; i++) {
+        for (var i = 1; i <= 6; i++) {
           var row = document.querySelector('[data-day="'+i+'"]');
           if (!row) continue;
           var dt = new Date(dy.time[i] + 'T00:00:00');
