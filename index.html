@@ -2617,7 +2617,7 @@
   /* ── Form delivery (bookings + reviews → Google Sheet + email) ──
      Paste the Google Apps Script Web App URL below to go live.
      While it is empty, the forms just show the confirmation (demo). */
-  const FORM_ENDPOINT = '';
+  const FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzvfWBFZXvqeVRfE5_eUAVg8pSOKH7cPLEx7L7rO5WW99kYdBQNc3nDKT1tS_Cke23FeQ/exec';
   function sendToSheet(type, data) {
     if (!FORM_ENDPOINT) return;                 // not configured yet → skip
     try {
