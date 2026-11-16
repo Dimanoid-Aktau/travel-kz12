@@ -2614,6 +2614,18 @@
 <script>
   'use strict';
 
+  /* ── Form delivery (bookings + reviews → Google Sheet + email) ──
+     Paste the Google Apps Script Web App URL below to go live.
+     While it is empty, the forms just show the confirmation (demo). */
+  const FORM_ENDPOINT = '';
+  function sendToSheet(type, data) {
+    if (!FORM_ENDPOINT) return;                 // not configured yet → skip
+    try {
+      const body = new URLSearchParams(Object.assign({ type: type }, data));
+      fetch(FORM_ENDPOINT, { method: 'POST', mode: 'no-cors', body: body }).catch(function(){});
+    } catch (e) {}
+  }
+
   /* ── Helpers ── */
   function jumpTo(selector) {
     const el = document.querySelector(selector);
@@ -2968,6 +2980,7 @@
       e.preventDefault();
       const r = { name: nameI.value.trim(), trip: tripI.value.trim(), text: textI.value.trim(), rating };
       if (!r.name || !r.text) { (r.name ? textI : nameI).focus(); return; }
+      sendToSheet('review', { name: r.name, trip: r.trip, text: r.text, rating: r.rating });
       const card = makeCard(r);
       grid.prepend(card);
       try { saved.push(r); localStorage.setItem(STORE, JSON.stringify(saved)); } catch (e) {}
@@ -3117,6 +3130,15 @@
       document.getElementById(name ? 'f-phone' : 'f-name').focus();
       return;
     }
+    sendToSheet('booking', {
+      name:    name,
+      phone:   phone,
+      email:   document.getElementById('f-email').value.trim(),
+      tour:    document.getElementById('f-tour').value,
+      date:    document.getElementById('f-date').value,
+      people:  document.getElementById('f-people').value,
+      comment: document.getElementById('f-comment').value.trim()
+    });
     submitBtn.querySelector('.ftxt').textContent = 'Заявка принята ✓';
     submitBtn.classList.add('sent');
     submitBtn.disabled = true;
