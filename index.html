@@ -1343,6 +1343,7 @@
     .map-pin span { transform: rotate(45deg); }
     .map-pin.base { background: var(--navy); border-radius: 50%; }
     .map-pin.base span { transform: none; }
+    .map-pin.extra { width: 12px; height: 12px; background: var(--ochre); border-radius: 50%; border: 2px solid #fff; box-shadow: 0 2px 6px rgba(0,0,0,.45); transform: none; }
     /* Leaflet popup — matched to the site */
     .leaflet-popup-content-wrapper {
       border-radius: 14px;
@@ -2553,7 +2554,7 @@
         <h4 data-i18n="footer.col.contacts">Контакты</h4>
         <ul>
           <li><a href="tel:+77016442444">+7 701 644 2444</a></li>
-          <li><a href="mailto:info.travelkz12@gmail.com">info.travelkz12@gmail.com</a></li>
+          <li><a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=info.travelkz12@gmail.com" target="_blank" rel="noopener">info.travelkz12@gmail.com</a></li>
           <li><a href="#" data-i18n="footer.city">г. Актау, Казахстан</a></li>
           <li><a href="#" data-i18n="footer.hours">Пн–Вс: 9:00–21:00</a></li>
         </ul>
@@ -3014,6 +3015,18 @@
     ];
     const AKTAU = { lat: 43.6481, lng: 51.1722, name: 'Актау', desc: 'Старт всех туров — встречаем вас здесь.' };
 
+    const EXTRA_PLACES = [
+      { lat: 43.195, lng: 52.638, name: 'Бекет-Ата',           desc: 'Подземная мечеть-некрополь — священное место паломничества на плато Устюрт.' },
+      { lat: 44.465, lng: 51.676, name: 'Шопан-Ата',           desc: 'Древний подземный мавзолей в скалах, один из самых почитаемых в Казахстане.' },
+      { lat: 43.465, lng: 51.737, name: 'Карагие (Батыр)',      desc: 'Глубочайшая депрессия СНГ — 132 м ниже уровня моря, сюрреалистический рельеф.' },
+      { lat: 43.185, lng: 51.330, name: 'Жыгылган',            desc: '«Провалившаяся земля» на берегу Каспия — мозаика оползней и скалистых арок.' },
+      { lat: 44.510, lng: 50.263, name: 'Форт-Шевченко',       desc: 'Исторический город с музеем Тараса Шевченко, Малым Аралом и Мангышлакским маяком.' },
+      { lat: 43.530, lng: 51.090, name: 'Некрополь Кошкар-Ата',desc: 'Огромный старинный казахский некрополь с мазарами, сагана-тамами и кулпытасами.' },
+      { lat: 44.390, lng: 52.052, name: 'Каньон Айракты',      desc: 'Яркие полосатые скалы и ущелья близ посёлка Шетпе — «Мангистауская радуга».' },
+      { lat: 43.600, lng: 52.295, name: 'Мечеть Масат-Ата',    desc: 'Подземная мечеть, вырубленная в скальном массиве сотни лет назад.' },
+      { lat: 43.342, lng: 51.183, name: 'Мыс Аташ',            desc: 'Вечный природный огонь прямо на берегу Каспийского моря.' },
+    ];
+
     const esc = (s) => String(s).replace(/[&<>"']/g, m => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m]));
 
     function init() {
@@ -3038,6 +3051,10 @@
         className: '', html: '<div class="map-pin' + (base ? ' base' : '') + '"><span>' + n + '</span></div>',
         iconSize: [34, 34], iconAnchor: base ? [17, 17] : [17, 34], popupAnchor: [0, base ? -16 : -34]
       });
+      const dotPin = () => L.divIcon({
+        className: '', html: '<div class="map-pin extra"></div>',
+        iconSize: [12, 12], iconAnchor: [6, 6], popupAnchor: [0, -10]
+      });
 
       const bounds = [];
       PLACES.forEach(p => {
@@ -3061,6 +3078,17 @@
         .addTo(map)
         .bindPopup('<div class="map-pop-name">' + esc(AKTAU.name) + '</div><p class="map-pop-desc" style="margin:0">' + esc(AKTAU.desc) + '</p>');
       bounds.push([AKTAU.lat, AKTAU.lng]);
+
+      // Extra attraction dots (no number)
+      EXTRA_PLACES.forEach(p => {
+        const gmaps = 'https://www.google.com/maps/dir/?api=1&destination=' + p.lat + ',' + p.lng;
+        const html =
+          '<div class="map-pop-name">' + esc(p.name) + '</div>' +
+          '<p class="map-pop-desc">' + esc(p.desc) + '</p>' +
+          '<a class="map-pop-btn" href="' + gmaps + '" target="_blank" rel="noopener">Показать на карте →</a>';
+        L.marker([p.lat, p.lng], { icon: dotPin(), title: p.name })
+          .addTo(map).bindPopup(html, { maxWidth: 260 });
+      });
 
       map.fitBounds(bounds, { padding: [48, 48] });
       // Re-measure once the section becomes visible (it starts hidden/animated)
