@@ -356,6 +356,7 @@
     }
     .nav-social-wa { background: #25D366; }
     .nav-social-ig { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+    .nav-social-fb { background: #1877F2; }
     .nav-social svg { width: 17px; height: 17px; }
     /* Language switcher */
     .lang-switch { display: flex; align-items: center; gap: 2px; }
@@ -479,6 +480,7 @@
     .nav-chat-menu a svg { width: 21px; height: 21px; }
     .nav-chat-wa { background: #25D366; }
     .nav-chat-ig { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+    .nav-chat-fb { background: #1877F2; }
 
     /* ============================================================
        HERO — 4-LAYER PARALLAX
@@ -1299,6 +1301,7 @@
     .footer-social a:hover { transform: translateY(-2px); filter: brightness(1.08); box-shadow: 0 6px 16px rgba(0,0,0,.3); }
     .footer-social-wa { background: #25D366; }
     .footer-social-ig { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+    .footer-social-fb { background: #1877F2; }
     .footer-col h4 {
       color: var(--white);
       font-size: 11px;
@@ -1353,7 +1356,7 @@
       pointer-events: none;
     }
     #btt.show { opacity: 1; transform: none; pointer-events: all; }
-    #btt:hover { background: var(--ochre); }
+    #btt:hover { background: var(--navy); }
 
     /* ============================================================
        REVIEWS
@@ -1369,7 +1372,7 @@
     #faq .section-eyebrow { color: var(--ochre); }
     #faq .section-title   { color: #fff; }
     #faq .section-desc    { color: rgba(255,255,255,.65); }
-    #faq .fbtn:hover      { background: var(--ochre); }
+    #faq .fbtn:hover      { background: var(--navy); box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.55); }
     .faq-head { text-align: center; margin-bottom: 52px; }
     .faq-head .section-desc { max-width: 520px; margin: 14px auto 0; }
     .faq-list { max-width: 860px; margin: 0 auto; }
@@ -1557,7 +1560,7 @@
       font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
       cursor: pointer; transition: background .2s, transform .15s;
     }
-    .review-submit:hover { background: #a84932; }
+    .review-submit:hover { background: var(--navy); box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.55); }
     .review-submit:active { transform: scale(.98); }
     .review-submit:disabled { opacity: .65; cursor: default; }
 
@@ -1633,7 +1636,7 @@
       font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
       transition: background .2s;
     }
-    .leaflet-popup-content a.map-pop-btn:hover { background: #a84932; }
+    .leaflet-popup-content a.map-pop-btn:hover { background: var(--navy); }
 
     /* ============================================================
        RESPONSIVE — TABLET (≤1024px)
@@ -2008,6 +2011,9 @@
       </a>
       <a class="nav-social-ig" href="https://www.instagram.com/travel_kz12" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a class="nav-social-fb" href="https://www.facebook.com/dmitry.kurochkin.2025" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.12 5.32H17V2.14A26.11 26.11 0 0 0 14.26 2C11.54 2 9.68 3.66 9.68 6.7v2.62H6.61v3.56h3.07V22h3.68v-9.12h3.06l.46-3.56h-3.52V7.05c0-1.03.28-1.73 1.76-1.73Z"/></svg>
       </a>
     </div>
   </div>
@@ -2864,6 +2870,9 @@
           <a class="footer-social-ig" href="https://www.instagram.com/travel_kz12" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>
           </a>
+          <a class="footer-social-fb" href="https://www.facebook.com/dmitry.kurochkin.2025" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.12 5.32H17V2.14A26.11 26.11 0 0 0 14.26 2C11.54 2 9.68 3.66 9.68 6.7v2.62H6.61v3.56h3.07V22h3.68v-9.12h3.06l.46-3.56h-3.52V7.05c0-1.03.28-1.73 1.76-1.73Z"/></svg>
+          </a>
         </div>
       </div>
       <div class="footer-col">
@@ -2925,6 +2934,9 @@
     </a>
     <a class="nav-chat-ig" href="https://www.instagram.com/travel_kz12" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>
+    </a>
+    <a class="nav-chat-fb" href="https://www.facebook.com/dmitry.kurochkin.2025" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.12 5.32H17V2.14A26.11 26.11 0 0 0 14.26 2C11.54 2 9.68 3.66 9.68 6.7v2.62H6.61v3.56h3.07V22h3.68v-9.12h3.06l.46-3.56h-3.52V7.05c0-1.03.28-1.73 1.76-1.73Z"/></svg>
     </a>
   </div>
 </div>
