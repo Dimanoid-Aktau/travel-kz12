@@ -1,0 +1,10 @@
+# TRAVEL KZ12 — https://mangistautravel.kz
+# Открыт для индексации целиком.
+
+User-agent: *
+Allow: /
+
+# Служебный скрипт доставки форм — в поиске ему делать нечего
+Disallow: /apps-script-reviews.js
+
+Sitemap: https://mangistautravel.kz/sitemap.xml
