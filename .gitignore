@@ -5,6 +5,7 @@ Galery/Доп/
 Бозжыра/
 Долина шаров/
 Тузбаир/
+Наши маршруты/
 
 # Source / design files (not part of the published site)
 /*.cdr
@@ -17,13 +18,23 @@ Galery/Доп/
 !why-icon-4.svg
 !why-icon-5.svg
 !LOGO_TRAVELKZ12.svg
+!NEW-LOGO.svg
+!favicon.svg
+!og-image.svg
 
 # Stray unused images at root (real assets live in BG/, 2 block/, Galery/)
 /*.png
 !ЛОГО 1.png
+!favicon-32.png
+!favicon-96.png
+!apple-touch-icon.png
+!og-image.png
 /*.jpg
 /*.jpeg
 /*.webp
+
+# Рабочие файлы анализа — не часть сайта (внутри лежат транскрипты)
+graphify-out/
 
 # Tooling / local
 .claude/
