@@ -536,7 +536,8 @@
       --hero-fg-h: min(calc(var(--hero-fg-w) * 1.7778), 100svh);
       --hero-ridge: calc(var(--hero-fg-w) * 0.8889);        /* skyline above base */
       --hero-peak:  calc(var(--hero-fg-w) * 1.1378);        /* spire tips above base */
-      --hero-sink:  17vw;                                  /* how deep the title dips */
+      /* negative sink keeps the whole wordmark clear of the spires */
+      --hero-sink:  -2vw;                                  /* how deep the title dips */
     }
     /* Mobile hero sky — hidden on desktop (video is used there) */
     .hero-mobile-img {
@@ -1859,7 +1860,12 @@
         letter-spacing: .5px;
         margin-top: 0;
       }
-      .hero-cta { bottom: 13%; }
+      /* line the CTA up with the floating chat button on the right:
+         fab sits at bottom 76px and is 42px tall (centre 97px above the
+         base), the pill is 46px tall -> 97 - 23 = 74px */
+      .hero-cta { bottom: 74px; }
+      /* no room left under the CTA once it lines up with the chat button */
+      .scroll-cue { display: none; }
 
       .container { padding: 0 20px; }
 
@@ -1976,7 +1982,7 @@
         height: 100%;
         object-position: center;
       }
-      .hero-eyebrow { bottom: auto; top: 26%; }
+      .hero-eyebrow { bottom: auto; top: 19%; }   /* clear of the spire tips (~31%) */
     }
 
     /* Phones held sideways: a 9:16 still blown up to a wide, short viewport
@@ -1989,7 +1995,7 @@
       .hero-eyebrow { bottom: auto; top: 16%; text-shadow: none; }
       .hero-eyebrow-text { font-size: 22px; letter-spacing: 4px; margin-bottom: 2px; }
       .hero-title-mob { font-size: 42px; }
-      .hero-cta { bottom: 12%; }
+      .hero-cta { bottom: 74px; }
       .scroll-cue { display: none; }
     }
 
