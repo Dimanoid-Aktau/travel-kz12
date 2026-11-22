@@ -991,10 +991,21 @@
       font-weight: 700;
     }
     .guide-cred b { color: var(--navy); font-weight: 700; }
+    .guide-badges {
+      margin-top: 30px;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .guide-badges img {
+      display: block;
+      height: 76px;
+      width: auto;
+    }
 
     @media (max-width: 1024px) {
       .guide { grid-template-columns: 250px 1fr; gap: 32px; padding: 36px; margin-top: 72px; }
       .guide-name { font-size: 28px; }
+      .guide-badges img { height: 64px; }
     }
     @media (max-width: 768px) {
       .guide { grid-template-columns: 1fr; gap: 26px; padding: 28px 20px; margin-top: 56px; }
@@ -1003,6 +1014,8 @@
       .guide-role { font-size: 14px; margin-bottom: 16px; }
       .guide-desc { font-size: 14px; line-height: 1.75; margin-bottom: 20px; }
       .guide-cred { font-size: 13.5px; }
+      .guide-badges { margin-top: 24px; justify-content: center; }
+      .guide-badges img { height: 52px; }
     }
 
     /* ============================================================
@@ -2502,6 +2515,10 @@
           <li class="guide-cred" data-i18n="guide.c2">Ассоциация «KazGuides» — участник <b>WFTGA</b>, Всемирной федерации ассоциаций туристических гидов</li>
           <li class="guide-cred" data-i18n="guide.c3">Проводит маршруты на русском и английском языках</li>
         </ul>
+        <div class="guide-badges">
+          <img src="team/kazguides-wftga.svg" width="268" height="128" loading="lazy"
+               alt="Ассоциация «KazGuides» · Full member of WFTGA" onerror="this.closest('.guide-badges').remove()">
+        </div>
       </div>
     </div>
   </div>
