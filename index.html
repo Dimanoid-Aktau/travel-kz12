@@ -145,7 +145,9 @@
   </script>
 
   <!-- Preload critical images -->
-  <link rel="preload" as="image" href="BG/hero-poster.jpg">
+  <link rel="preload" as="image" href="BG/hero-poster.jpg" media="(min-width: 769px)">
+  <link rel="preload" as="image" href="BG/hero-sky-mobile.webp" media="(max-width: 768px)">
+  <link rel="preload" as="image" href="BG/hero-rocks-mobile.webp" media="(max-width: 768px)">
   <link rel="preload" as="image" href="BG/BG%20%D0%B7%D0%B0%D0%B4%D0%BD%D1%8F%D1%8F%20%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D0%B0.png">
   <link rel="preload" as="image" href="BG/MANGISTAU.png">
 
@@ -521,13 +523,29 @@
     }
     /* Layer A visible by default (fallback if JS is off) */
     #heroVidA { opacity: 1; }
-    /* Mobile hero still image — hidden on desktop (video is used there) */
+    /* ── Mobile hero composition ──────────────────────────────────────
+       Two stacked layers: a full-bleed sunset sky (back) and the cut-out
+       rocks with a transparent sky (front). The rocks are scaled off the
+       viewport WIDTH and pinned to the bottom, so the skyline always sits
+       a known distance above the hero bottom (--hero-ridge) — that's what
+       the title is anchored to, so it always dips behind the peaks.
+       Rocks image is 1125x2000 (ratio 1.7778); its skyline is at ~50% of
+       the image height, its highest spires at ~36%.                      */
+    #hero {
+      --hero-fg-w: 112vw;                                   /* rock layer width  */
+      --hero-fg-h: min(calc(var(--hero-fg-w) * 1.7778), 100svh);
+      --hero-ridge: calc(var(--hero-fg-w) * 0.8889);        /* skyline above base */
+      --hero-peak:  calc(var(--hero-fg-w) * 1.1378);        /* spire tips above base */
+      --hero-sink:  17vw;                                  /* how deep the title dips */
+    }
+    /* Mobile hero sky — hidden on desktop (video is used there) */
     .hero-mobile-img {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center bottom;
       z-index: 0;
       pointer-events: none;
       display: none;
@@ -536,15 +554,17 @@
        sits IN FRONT of the title so the text slides behind the peaks */
     .hero-fg-mobile {
       position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
+      left: 50%;
+      bottom: 0;
+      width: var(--hero-fg-w);
+      height: var(--hero-fg-h);
+      margin-left: calc(var(--hero-fg-w) / -2);
+      max-width: none;
       object-fit: cover;
-      object-position: center;
+      object-position: center bottom;
       z-index: 5;
       pointer-events: none;
       display: none;
-      will-change: transform;
     }
     .hero-overlay {
       position: absolute;
@@ -1815,26 +1835,31 @@
       .hero-fg-mobile { display: block; }
       /* No darkening over the hero photo on mobile */
       .hero-overlay { display: none; }
-      /* Hero title — text block pulled up near the sky, tight + large.
-         z-index 2 keeps it behind the foreground rocks (z-index 5) for parallax */
+      /* Hero title — anchored to the rock skyline so the wordmark always
+         dips behind the peaks (--hero-ridge = skyline height above the hero
+         bottom, --hero-sink = how far the letters sink below it).
+         z-index 2 keeps it behind the foreground rocks (z-index 5). */
       #plx-title { display: none; }
       .hero-eyebrow {
-        top: 22%;
+        top: auto;
+        bottom: calc(var(--hero-peak) - var(--hero-sink));
         z-index: 2;
         will-change: transform, opacity;
         backface-visibility: hidden;
+        text-shadow: 0 2px 24px rgba(40,22,10,.38);
       }
       .hero-eyebrow-text {
-        font-size: clamp(26px, 8vw, 44px);
+        font-size: clamp(24px, 7.4vw, 44px);
         letter-spacing: 5px;
-        margin-bottom: 6px;
+        margin-bottom: 4px;
       }
       .hero-title-mob {
         display: block;
-        font-size: clamp(38px, 12.5vw, 60px);
+        font-size: clamp(36px, 12.4vw, 60px);
         letter-spacing: .5px;
+        margin-top: 0;
       }
-      .hero-cta { bottom: 18%; }
+      .hero-cta { bottom: 13%; }
 
       .container { padding: 0 20px; }
 
@@ -1937,6 +1962,35 @@
       .footer-bottom { justify-content: center; text-align: center; font-size: 14px; }
 
       #btt { right: 16px; bottom: 20px; }
+    }
+
+    /* Small tablets: the 9:16 rock layer can't be width-fitted without towering
+       over the viewport, so fall back to a centred cover crop and a
+       percentage-anchored title. */
+    @media (min-width: 601px) and (max-width: 768px) and (orientation: portrait) {
+      .hero-mobile-img { object-position: center; }
+      .hero-fg-mobile {
+        left: 0;
+        margin-left: 0;
+        width: 100%;
+        height: 100%;
+        object-position: center;
+      }
+      .hero-eyebrow { bottom: auto; top: 26%; }
+    }
+
+    /* Phones held sideways: a 9:16 still blown up to a wide, short viewport
+       shows nothing but rock, so use the wide-format hero video there and
+       tighten the stack to fit the little vertical room. */
+    @media (max-width: 768px) and (orientation: landscape) {
+      .hero-video { display: block; }
+      .hero-mobile-img, .hero-fg-mobile { display: none; }
+      .hero-overlay { display: block; }
+      .hero-eyebrow { bottom: auto; top: 16%; text-shadow: none; }
+      .hero-eyebrow-text { font-size: 22px; letter-spacing: 4px; margin-bottom: 2px; }
+      .hero-title-mob { font-size: 42px; }
+      .hero-cta { bottom: 12%; }
+      .scroll-cue { display: none; }
     }
 
     @media (max-width: 480px) {
@@ -2183,8 +2237,8 @@
   <video class="hero-video" id="heroVidB" muted playsinline preload="none" poster="BG/hero-poster.jpg" aria-hidden="true">
     <source src="NEW%20HERO.mp4" type="video/mp4">
   </video>
-  <img class="hero-mobile-img" src="BG/hero-mobile.jpg" alt="Скалы Мангистау" aria-hidden="true">
-  <img class="hero-fg-mobile" src="BG/hero-fg.webp" alt="" aria-hidden="true">
+  <img class="hero-mobile-img" src="BG/hero-sky-mobile.webp" alt="" aria-hidden="true">
+  <img class="hero-fg-mobile" src="BG/hero-rocks-mobile.webp" alt="" aria-hidden="true">
   <div class="hero-overlay" aria-hidden="true"></div>
   <div class="plx" id="plx-title" aria-hidden="true"></div>
 
