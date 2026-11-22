@@ -172,6 +172,22 @@
     },
     "telephone": "+77016442444",
     "areaServed": "Мангистауская область, Казахстан",
+    "employee": {
+      "@type": "Person",
+      "name": "Дмитрий Курочкин",
+      "jobTitle": "Гид-проводник по Мангистау",
+      "image": "https://mangistautravel.kz/team/guide-dmitry.jpg",
+      "knowsLanguage": ["ru", "en"],
+      "memberOf": {
+        "@type": "Organization",
+        "name": "ОЮЛ и ИП СРО в форме Ассоциации «KazGuides»",
+        "memberOf": {
+          "@type": "Organization",
+          "name": "World Federation of Tourist Guide Associations (WFTGA)",
+          "url": "https://wftga.org"
+        }
+      }
+    },
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "Туры по Мангистау",
@@ -890,6 +906,103 @@
       font-size: 15px;
       line-height: 1.85;
       color: var(--text-muted);
+    }
+
+    /* ---- наш гид ---- */
+    .guide {
+      margin-top: 96px;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 48px;
+      align-items: center;
+      background: var(--sand);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+    }
+    .guide-photo {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: var(--cream-dark);
+    }
+    .guide-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .guide-eyebrow {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 14px;
+    }
+    .guide-name {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .guide-role {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ochre);
+      margin-bottom: 22px;
+    }
+    .guide-desc {
+      font-size: 15px;
+      line-height: 1.85;
+      color: var(--text-muted);
+      margin-bottom: 26px;
+    }
+    .guide-creds {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+    }
+    .guide-cred {
+      position: relative;
+      padding-left: 34px;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text);
+    }
+    .guide-cred::before {
+      content: '\2713';
+      position: absolute;
+      left: 0;
+      top: 2px;
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--terra);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .guide-cred b { color: var(--navy); font-weight: 700; }
+
+    @media (max-width: 1024px) {
+      .guide { grid-template-columns: 250px 1fr; gap: 32px; padding: 36px; margin-top: 72px; }
+      .guide-name { font-size: 28px; }
+    }
+    @media (max-width: 768px) {
+      .guide { grid-template-columns: 1fr; gap: 26px; padding: 28px 20px; margin-top: 56px; }
+      .guide-photo { max-width: 230px; margin: 0 auto; }
+      .guide-name { font-size: 24px; }
+      .guide-role { font-size: 14px; margin-bottom: 16px; }
+      .guide-desc { font-size: 14px; line-height: 1.75; margin-bottom: 20px; }
+      .guide-cred { font-size: 13.5px; }
     }
 
     /* ============================================================
@@ -2371,6 +2484,24 @@
       </div>
 
     </div>
+
+    <div class="guide reveal">
+      <div class="guide-photo">
+        <img src="team/guide-dmitry.jpg" width="1000" height="1250" loading="lazy"
+             alt="Дмитрий Курочкин — гид-проводник по Мангистау" onerror="this.closest('.guide-photo').remove()">
+      </div>
+      <div class="guide-body">
+        <span class="guide-eyebrow" data-i18n="guide.eyebrow">Наш гид</span>
+        <h3 class="guide-name" data-i18n="guide.name">Дмитрий Курочкин</h3>
+        <p class="guide-role" data-i18n="guide.role">Гид-проводник по Мангистау, Актау</p>
+        <p class="guide-desc" data-i18n="guide.desc">Дмитрий встречает группу и ведёт её все дни маршрута: сам за рулём внедорожника, сам прокладывает путь по бездорожью и отвечает за безопасность людей. Знает, где поставить лагерь, в какой час плато выглядит лучше всего и о чём молчат эти камни.</p>
+        <ul class="guide-creds">
+          <li class="guide-cred" data-i18n="guide.c1">Рекомендованный гид <b>ОЮЛ и ИП СРО в форме Ассоциации «KazGuides»</b> — профессионального объединения гидов Казахстана</li>
+          <li class="guide-cred" data-i18n="guide.c2">Ассоциация «KazGuides» — участник <b>WFTGA</b>, Всемирной федерации ассоциаций туристических гидов</li>
+          <li class="guide-cred" data-i18n="guide.c3">Проводит маршруты на русском и английском языках</li>
+        </ul>
+      </div>
+    </div>
   </div>
   <div class="tear" style="color:var(--navy)"><svg class="tear-svg"><use href="#tearShape"/></svg></div>
 </section>
@@ -3008,6 +3139,11 @@
         'why.2.t':'Reliable vehicles','why.2.d':'Prepared 4×4 off-roaders for any terrain. We reach places a regular car cannot.',
         'why.3.t':'Comfort in the desert','why.3.d':'Quality gear, home-cooked meals and cozy camps under the starriest sky of your life.',
         'why.4.t':'The best views','why.4.d':'We know the golden hours and spots for perfect shots. You will return with breathtaking photos.',
+        'guide.eyebrow':'Our guide','guide.name':'Dmitry Kurochkin','guide.role':'Guide and driver in Mangystau, based in Aktau',
+        'guide.desc':'Dmitry meets the group and leads it through every day of the route: he drives the 4×4 himself, picks the way across the off-road terrain and answers for the safety of the people with him. He knows where to pitch the camp, at what hour the plateau looks its best and what these rocks keep quiet about.',
+        'guide.c1':'Recommended guide of the <b>«KazGuides» Association</b> — the self-regulating professional association of guides of Kazakhstan',
+        'guide.c2':'The «KazGuides» Association is a member of the <b>WFTGA</b>, the World Federation of Tourist Guide Associations',
+        'guide.c3':'Leads the routes in Russian and English',
         'why.5.t':'Fair prices','why.5.d':'Transparent pricing with no hidden fees. You pay exactly what we agreed at booking.',
         'booking.eyebrow':'Booking','booking.title':'Start your<br>adventure','booking.desc':'Leave a request — and we will contact you within 2 hours to pick the perfect tour.',
         'booking.feat1':'Private and group formats','booking.feat2':'We help arrange your transfer','booking.feat3':'Flexible program to your wishes','booking.feat4':'No deposit — pay on the day',
@@ -3079,6 +3215,11 @@
         'why.2.t':'Zuverlässige Fahrzeuge','why.2.d':'Ausgerüstete 4×4-Geländewagen für jedes Gelände. Wir erreichen Orte, die ein normales Auto nicht schafft.',
         'why.3.t':'Komfort in der Wüste','why.3.d':'Hochwertige Ausrüstung, hausgemachtes Essen und gemütliche Nachtlager unter dem sternenreichsten Himmel.',
         'why.4.t':'Die besten Perspektiven','why.4.d':'Wir kennen die goldenen Stunden und Orte für perfekte Aufnahmen. Sie kehren mit atemberaubenden Fotos zurück.',
+        'guide.eyebrow':'Unser Guide','guide.name':'Dmitry Kurochkin','guide.role':'Guide und Fahrer in Mangystau, mit Sitz in Aktau',
+        'guide.desc':'Dmitry empfängt die Gruppe und begleitet sie an allen Tagen der Route: Er fährt den 4×4 selbst, sucht die Spur durchs Gelände und trägt die Verantwortung für die Sicherheit der Gäste. Er weiß, wo das Camp hingehört, zu welcher Stunde das Plateau am schönsten ist und worüber diese Felsen schweigen.',
+        'guide.c1':'Empfohlener Guide der <b>Assoziation «KazGuides»</b> — des selbstregulierenden Berufsverbands der Guides Kasachstans',
+        'guide.c2':'Die Assoziation «KazGuides» ist Mitglied der <b>WFTGA</b>, der Weltföderation der Fremdenführerverbände',
+        'guide.c3':'Führt die Routen auf Russisch und Englisch',
         'why.5.t':'Faire Preise','why.5.d':'Transparente Preise ohne versteckte Kosten. Sie zahlen genau das, was bei der Buchung vereinbart wurde.',
         'booking.eyebrow':'Buchung','booking.title':'Beginne dein<br>Abenteuer','booking.desc':'Hinterlasse eine Anfrage — und wir melden uns innerhalb von 2 Stunden, um die perfekte Tour zu finden.',
         'booking.feat1':'Einzel- und Gruppenformat','booking.feat2':'Wir helfen bei der Transfer-Organisation','booking.feat3':'Flexibles Programm nach Ihren Wünschen','booking.feat4':'Ohne Anzahlung — Zahlung vor Ort',
@@ -3150,6 +3291,11 @@
         'why.2.t':'Transport fiable','why.2.d':'Des 4×4 préparés pour tout terrain. Nous atteignons là où une voiture ordinaire ne passe pas.',
         'why.3.t':'Confort dans le désert','why.3.d':'Équipement de qualité, cuisine maison et bivouacs confortables sous le ciel le plus étoilé.',
         'why.4.t':'Les meilleurs angles','why.4.d':'Nous connaissons les heures dorées et les meilleurs spots. Vous reviendrez avec des photos à couper le souffle.',
+        'guide.eyebrow':'Notre guide','guide.name':'Dmitry Kurochkin','guide.role':'Guide et chauffeur au Mangystau, basé à Aktaou',
+        'guide.desc':'Dmitry accueille le groupe et l’accompagne tout au long de l’itinéraire : il conduit lui-même le 4×4, trace la route hors piste et répond de la sécurité de chacun. Il sait où installer le campement, à quelle heure le plateau est le plus beau et ce que taisent ces rochers.',
+        'guide.c1':'Guide recommandé de l’<b>Association «KazGuides»</b> — l’association professionnelle autorégulée des guides du Kazakhstan',
+        'guide.c2':'L’Association «KazGuides» est membre de la <b>WFTGA</b>, la Fédération mondiale des associations de guides touristiques',
+        'guide.c3':'Conduit les circuits en russe et en anglais',
         'why.5.t':'Prix honnêtes','why.5.d':'Tarifs transparents sans frais cachés. Vous payez exactement ce qui a été convenu.',
         'booking.eyebrow':'Réservation','booking.title':'Commence ton<br>aventure','booking.desc':'Laisse une demande — et nous te contacterons sous 2 heures pour choisir le tour idéal.',
         'booking.feat1':'Format privé et en groupe','booking.feat2':'Nous aidons à organiser le transfert','booking.feat3':'Programme flexible selon vos envies','booking.feat4':'Sans acompte — paiement sur place',
