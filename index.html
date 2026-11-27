@@ -1293,6 +1293,9 @@
       object-fit: cover;
       background: #0d1824;
     }
+    /* Fullscreen is 16:9 — `cover` would crop the vertical frame, so letterbox it */
+    .gallery-video video:fullscreen { aspect-ratio: auto; object-fit: contain; }
+    .gallery-video video:-webkit-full-screen { aspect-ratio: auto; object-fit: contain; }
     .gallery-video:active .gallery-tilt { transform: none !important; }
     .gallery-cell .overlay {
       position: absolute;
