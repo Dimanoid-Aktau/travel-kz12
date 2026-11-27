@@ -852,6 +852,7 @@
     }
     .tour-price-alt { font-size: 13px; color: var(--text-muted); }
     .tour-price-alt b { font-weight: 700; color: var(--navy); }
+    .routes-pricenote { font-size: 14px; margin-top: 14px; }
     .tour-btn {
       font-size: 10px;
       font-weight: 700;
@@ -1285,6 +1286,14 @@
       transition: transform .6s cubic-bezier(.22,1,.36,1);
     }
     .gallery-cell:hover img { transform: scale(1.05); }
+    .gallery-video video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
+      background: #0d1824;
+    }
+    .gallery-video:active .gallery-tilt { transform: none !important; }
     .gallery-cell .overlay {
       position: absolute;
       inset: 0;
@@ -1943,7 +1952,7 @@
         margin-bottom: 0;
         scroll-snap-align: center;
       }
-      .gallery-cell img { height: 300px; }
+      .gallery-cell img, .gallery-video video { height: 300px; }
 
       footer {
         padding: 70px 0 28px;
@@ -2374,6 +2383,9 @@
       <p class="section-desc reveal reveal-delay-2" data-i18n="routes.desc">
         Пять маршрутов — от одного насыщенного дня<br>до большой восьмидневной экспедиции.
       </p>
+      <p class="section-desc routes-pricenote reveal reveal-delay-3" data-i18n="routes.pricenote">
+        Цены ориентировочные — уточняйте актуальную стоимость при бронировании.
+      </p>
     </div>
 
     <div class="tours-list">
@@ -2702,6 +2714,9 @@
       </p>
     </div>
     <div class="gallery-grid">
+      <div class="gallery-cell gallery-video reveal">
+        <div class="gallery-tilt"><video controls preload="none" poster="Galery/clip-poster.jpg" aria-label="Видео из экспедиции по Мангистау"><source src="Galery/clip-mangystau.mp4" type="video/mp4"></video></div>
+      </div>
       <div class="gallery-cell reveal">
         <div class="gallery-tilt"><img src="Galery/IMG_1.jpg" alt="Пейзаж Мангистау" loading="lazy"><div class="overlay"></div></div>
       </div>
@@ -3270,7 +3285,7 @@
         'faq.cta':'Still have questions? Ask us directly — or book straight away.',
         'faq.wa':'Write on WhatsApp',
         'faq.book':'Book a tour',
-        'price.person':'per person','price.car':'per vehicle',
+        'routes.pricenote':'Prices are indicative — please confirm the current cost when booking.','price.person':'per person','price.car':'per vehicle',
         'form.privacy':'We use your data only to contact you about the booking and never pass it to third parties. You can withdraw your consent at any time — write to info.travelkz12@gmail.com.',
         'form.consent':'I consent to the processing of my personal data and accept the <a href="privacy.html" target="_blank" rel="noopener">privacy policy</a>.',
         'form.submit':'Book a tour','ph.name':'Your name','ph.comment':'Tell us your wishes...',
@@ -3346,7 +3361,7 @@
         'faq.cta':'Noch Fragen? Fragen Sie direkt — oder buchen Sie gleich.',
         'faq.wa':'Auf WhatsApp schreiben',
         'faq.book':'Tour buchen',
-        'price.person':'pro Person','price.car':'pro Fahrzeug',
+        'routes.pricenote':'Die Preise sind Richtwerte — bitte erfragen Sie den aktuellen Preis bei der Buchung.','price.person':'pro Person','price.car':'pro Fahrzeug',
         'form.privacy':'Wir verwenden Ihre Daten nur für die Kontaktaufnahme zur Buchung und geben sie nicht an Dritte weiter. Sie können Ihre Einwilligung jederzeit widerrufen — schreiben Sie an info.travelkz12@gmail.com.',
         'form.consent':'Ich willige in die Verarbeitung meiner personenbezogenen Daten ein und akzeptiere die <a href="privacy.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.',
         'form.submit':'Tour buchen','ph.name':'Ihr Name','ph.comment':'Erzählen Sie uns Ihre Wünsche...',
@@ -3422,7 +3437,7 @@
         'faq.cta':'Une question ? Demandez-nous directement — ou réservez tout de suite.',
         'faq.wa':'Écrire sur WhatsApp',
         'faq.book':'Réserver un circuit',
-        'price.person':'par personne','price.car':'par véhicule',
+        'routes.pricenote':'Les prix sont indicatifs — merci de confirmer le tarif actuel lors de la réservation.','price.person':'par personne','price.car':'par véhicule',
         'form.privacy':'Vos données servent uniquement à vous contacter au sujet de la réservation et ne sont jamais transmises à des tiers. Vous pouvez retirer votre consentement à tout moment — écrivez à info.travelkz12@gmail.com.',
         'form.consent':'Je consens au traitement de mes données personnelles et j’accepte la <a href="privacy.html" target="_blank" rel="noopener">politique de confidentialité</a>.',
         'form.submit':'Réserver un tour','ph.name':'Votre nom','ph.comment':'Dites-nous vos envies...',
@@ -3498,7 +3513,7 @@
         'faq.cta':'Altre domande? Chiedete direttamente \u2014 o prenotate subito.',
         'faq.wa':'Scrivi su WhatsApp',
         'faq.book':'Prenota un tour',
-        'price.person':'a persona','price.car':'per veicolo',
+        'routes.pricenote':'I prezzi sono indicativi — confermate il costo attuale al momento della prenotazione.','price.person':'a persona','price.car':'per veicolo',
         'form.privacy':'Usiamo i vostri dati solo per contattarvi in merito alla prenotazione e non li cediamo a terzi. Potete revocare il consenso in qualsiasi momento \u2014 scrivete a info.travelkz12@gmail.com.',
         'form.consent':'Acconsento al trattamento dei miei dati personali e accetto l\u2019<a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">informativa sulla privacy</a>.',
         'form.submit':'Prenota un tour','ph.name':'Il tuo nome','ph.comment':'Raccontaci i tuoi desideri...',
@@ -3655,7 +3670,7 @@
 
   /* ── Gallery 3D parallax tilt (framer-motion style) ── */
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    document.querySelectorAll('.gallery-cell').forEach(cell => {
+    document.querySelectorAll('.gallery-cell:not(.gallery-video)').forEach(cell => {
       const tilt = cell.querySelector('.gallery-tilt');
       if (!tilt) return;
       cell.addEventListener('mousemove', e => {
